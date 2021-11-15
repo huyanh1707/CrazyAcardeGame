@@ -19,5 +19,6 @@ public class Main extends Application {
         stage.setTitle("BOMBERMAN");
         stage.setScene(scene);
         stage.show();
+        //test git
     }
 }
