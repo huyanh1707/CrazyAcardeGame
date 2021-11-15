@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.MenuController">
+<AnchorPane prefHeight="624.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.MenuController">
    <children>
       <Button layoutX="87.0" layoutY="101.0" mnemonicParsing="false" onAction="#PlayGame" text="Play" />
       <Button layoutX="87.0" layoutY="195.0" mnemonicParsing="false" text="Character" />
