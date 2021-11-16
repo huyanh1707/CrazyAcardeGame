@@ -28,5 +28,11 @@ public class GameLoop {
         for (Entity entity : MapCreate.getBoardLayer()) {
             entity.render(graphicsContext);
         }
+        for (Entity entity : MapCreate.getMidLayer()) {
+            entity.render(graphicsContext);
+        }
+        for (Entity entity : MapCreate.getTopLayer()) {
+            entity.render(graphicsContext);
+        }
     }
 }

@@ -1,9 +1,8 @@
 package gameplay;
 
 import controller.GameLoop;
-import entities.Entity;
-import entities.Grass;
-import entities.Wall;
+import entities.*;
+import graphics.Sprite;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
@@ -23,6 +22,8 @@ public class MapCreate {
     public static char[][] myMap;
     public static char[][] mapMatrix;
     private static final List<Entity> boardLayer = new ArrayList<>();
+    private static final List<Entity> topLayer = new ArrayList<>();
+    private static final List<Entity> midLayer = new ArrayList<>();
 
     public static int mapWidth;
     public static int mapHeight;
@@ -53,15 +54,29 @@ public class MapCreate {
     public static List<Entity> getBoardLayer() {
         return boardLayer;
     }
+    public static List<Entity> getMidLayer() {
+        return midLayer;
+    }
+    public static List<Entity> getTopLayer() {
+        return topLayer;
+    }
+
 
     public static void addEntity(char c, int x, int y) {
         switch (c) {
-            //maze
             case '#':
                 boardLayer.add(new Wall(x, y));
                 break;
+            case '*':
+                boardLayer.add(new Grass(x, y));
+                topLayer.add(new Brick(x, y));
+                break;
             case ' ':
                 boardLayer.add(new Grass(x, y));
+                break;
+            case 'p':
+                boardLayer.add(new Grass(x, y));
+                topLayer.add(new Player(x,y));
                 break;
         }
     }
