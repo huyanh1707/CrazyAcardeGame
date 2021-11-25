@@ -1,8 +1,13 @@
 package gameplay;
 
-import controller.GameLoop;
+import constants.Parameter;
+import entities.block.Brick;
+import entities.block.Grass;
+import entities.block.Wall;
+import gamelogic.KeyController;
+import gamelogic.GameLoop;
 import entities.*;
-import graphics.Sprite;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
@@ -18,6 +23,7 @@ import java.util.StringTokenizer;
 public class MapCreate {
     static Canvas canvas;
     static GraphicsContext graphicsContext;
+    static Player player;
 
     public static char[][] myMap;
     public static char[][] mapMatrix;
@@ -31,12 +37,13 @@ public class MapCreate {
     public static int CANVAS_WIDTH;
     public static int CANVAS_HEIGHT;
 
-    public static void initGame(Pane root) {
+    public static void initGame(Pane root, Scene scene) {
         canvas = new Canvas();
         root.getChildren().addAll(canvas);
         graphicsContext = canvas.getGraphicsContext2D();
         createLevel(1);
         GameLoop.start(graphicsContext);
+        KeyController.setOnKeys(scene);
     }
 
     public static void createLevel(int level) {
@@ -76,7 +83,7 @@ public class MapCreate {
                 break;
             case 'p':
                 boardLayer.add(new Grass(x, y));
-                topLayer.add(new Player(x,y));
+                player = Player.setPlayer(x, y, false);
                 break;
         }
     }

@@ -1,4 +1,4 @@
-package gameplay;
+package constants;
 
 public class Parameter {
     public static final int SCALE_RATIO = 3;

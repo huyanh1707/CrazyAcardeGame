@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -31,8 +30,8 @@ public class MenuController implements Initializable {
     public void PlayGame(ActionEvent event) throws Exception {
         Stage gameStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Pane appRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gameplay/GameView.fxml")));
-        MapCreate.initGame(appRoot);
         Scene scene = new Scene(appRoot);
+        MapCreate.initGame(appRoot, scene);
         gameStage.setScene(scene);
         gameStage.show();
     }

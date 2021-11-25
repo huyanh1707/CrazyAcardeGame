@@ -1,7 +1,10 @@
-package entities;
+package entities.block;
 
-import gameplay.Parameter;
+import constants.Parameter;
+import entities.Entity;
+import entities.RectangleBox;
 import graphics.Sprite;
+import javafx.scene.image.Image;
 
 public class Wall extends Entity {
     public Wall(int x, int y) {

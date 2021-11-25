@@ -16,4 +16,16 @@ public class RectangleBox {
         height = h;
         boundedBox = new Rectangle2D(x, y, width, height);
     }
+
+    public Rectangle2D getBoundedBox() {
+        return boundedBox;
+    }
+
+    public boolean checkCollision(RectangleBox other) {
+        return other.getBoundedBox().intersects(boundedBox);
+    }
+
+    public void setPosition(int x, int y) {
+        boundedBox = new Rectangle2D(x, y, width, height);
+    }
 }
