@@ -1,0 +1,20 @@
+.button
+{
+    -fx-border-image: url('button_surround.png');
+    -fx-background-color: transparent;
+    -fx-background-image: url('button_normal.png');
+}
+
+.button:hover
+{
+    -fx-border-image: url('button_surround.png');
+    -fx-opacity: 80%;
+}
+
+.button:pressed
+{
+    -fx-border-image-source: url('button_surround.png');
+    -fx-opacity: 100%;
+    -fx-background-color: transparent;
+    -fx-background-image: url('button_selected.png');
+}

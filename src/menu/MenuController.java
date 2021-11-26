@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.swing.text.html.ImageView;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -33,6 +34,7 @@ public class MenuController implements Initializable {
         Scene scene = new Scene(appRoot);
         MapCreate.initGame(appRoot, scene);
         gameStage.setScene(scene);
+        gameStage.centerOnScreen();
         gameStage.show();
     }
 
