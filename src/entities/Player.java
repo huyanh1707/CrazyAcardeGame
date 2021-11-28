@@ -127,6 +127,14 @@ public class Player extends MovingEntity {
         }
     }
 
+    public int getX_node() {
+        return this.x_node;
+    }
+
+    public int getY_node() {
+        return this.y_node;
+    }
+
     public int getSpeed() {
         return speed;
     }

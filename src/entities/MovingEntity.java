@@ -13,6 +13,8 @@ public abstract class MovingEntity extends AnimatedEntity {
     protected boolean alive;
     protected boolean ableToPassWall = false;
     protected boolean ableToPassBrick = false;
+    protected int passAwayTime = 30;
+    protected int aBigStep = Parameter.BLOCK_SIZE;
     protected int speed;
 
 

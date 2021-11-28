@@ -4,6 +4,7 @@ import constants.Parameter;
 import entities.block.Brick;
 import entities.block.Grass;
 import entities.block.Wall;
+import entities.enemies.*;
 import gamelogic.KeyController;
 import gamelogic.GameLoop;
 import entities.*;
@@ -30,6 +31,7 @@ public class MapCreate {
     private static final List<Entity> boardLayer = new ArrayList<>();
     private static final List<Entity> topLayer = new ArrayList<>();
     private static final List<Entity> midLayer = new ArrayList<>();
+    private static final List<Enemy> enemyLayer = new ArrayList<>();
 
     public static int mapWidth;
     public static int mapHeight;
@@ -42,6 +44,7 @@ public class MapCreate {
         root.getChildren().addAll(canvas);
         graphicsContext = canvas.getGraphicsContext2D();
         createLevel(1);
+        System.out.println("enemyLayer  " + enemyLayer.size());
         GameLoop.start(graphicsContext);
         KeyController.setOnKeys(scene);
     }
@@ -67,10 +70,14 @@ public class MapCreate {
     public static List<Entity> getTopLayer() {
         return topLayer;
     }
+    public static List<Enemy> getEnemyLayer() {
+        return enemyLayer;
+    }
 
 
     public static void addEntity(char c, int x, int y) {
         switch (c) {
+            // background and Player
             case '#':
                 boardLayer.add(new Wall(x, y));
                 break;
@@ -84,6 +91,24 @@ public class MapCreate {
             case 'p':
                 boardLayer.add(new Grass(x, y));
                 player = Player.setPlayer(x, y, false);
+                break;
+
+            //enemies
+            case '1':
+                boardLayer.add(new Grass(x, y));
+                enemyLayer.add(new Ballom(x, y));
+                break;
+            case '2':
+                boardLayer.add(new Grass(x, y));
+                enemyLayer.add(new Oneal(x, y));
+                break;
+            case '3':
+                boardLayer.add(new Grass(x, y));
+                enemyLayer.add(new Doll(x, y));
+                break;
+            case '4':
+                boardLayer.add(new Grass(x, y));
+                enemyLayer.add(new Kondoria(x, y));
                 break;
         }
     }
@@ -118,4 +143,13 @@ public class MapCreate {
             e.fillInStackTrace();
         }
     }
+
+    public static void clearMap() {
+        graphicsContext.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        enemyLayer.clear();
+        topLayer.clear();
+        midLayer.clear();
+        boardLayer.clear();
+    }
+
 }

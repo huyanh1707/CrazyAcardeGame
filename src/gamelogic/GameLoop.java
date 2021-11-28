@@ -3,6 +3,7 @@ package gamelogic;
 import constants.Parameter;
 import entities.Entity;
 import entities.Player;
+import entities.enemies.Enemy;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import gameplay.MapCreate;
@@ -31,9 +32,10 @@ public class GameLoop {
         for (int i = 0; i < MapCreate.getTopLayer().size(); i++) {
             MapCreate.getTopLayer().get(i).update();
         }
-
+        for (int i = 0; i < MapCreate.getEnemyLayer().size(); i++) {
+            MapCreate.getEnemyLayer().get(i).update();
+        }
         Player.getPlayer().update();
-//        MapCreate.removeEntity();
     }
 
     private static void renderGame(GraphicsContext graphicsContext) {
@@ -46,7 +48,9 @@ public class GameLoop {
         for (Entity entity : MapCreate.getTopLayer()) {
             entity.render(graphicsContext);
         }
-
+        for (Entity entity : MapCreate.getEnemyLayer()) {
+            entity.render(graphicsContext);
+        }
         Player.getPlayer().render(graphicsContext);
     }
 }
