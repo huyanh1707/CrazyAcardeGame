@@ -4,7 +4,6 @@ import constants.Parameter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-
 public abstract class Entity {
     protected int x_pos;
     protected int y_pos;
@@ -35,6 +34,10 @@ public abstract class Entity {
         removed = true;
     }
 
+    public boolean isRemoved() {
+        return removed;
+    }
+
     public RectangleBox getBoundedBox() {
         return boundedBox;
     }
@@ -42,5 +45,13 @@ public abstract class Entity {
     public boolean isColliding(Entity other) {
         RectangleBox otherBox = other.getBoundedBox();
         return boundedBox.checkCollision(otherBox);
+    }
+
+    public int getX_pos() {
+        return x_pos;
+    }
+
+    public int getY_pos() {
+        return y_pos;
     }
 }

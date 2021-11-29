@@ -1,20 +1,25 @@
-.button
-{
-    -fx-border-image: url('button_surround.png');
+.button {
     -fx-background-color: transparent;
-    -fx-background-image: url('button_normal.png');
+    -fx-background-image: url('blue_button00.png');
+    -fx-background-repeat: round;
 }
 
 .button:hover
 {
-    -fx-border-image: url('button_surround.png');
-    -fx-opacity: 80%;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
 }
 
 .button:pressed
 {
-    -fx-border-image-source: url('button_surround.png');
     -fx-opacity: 100%;
     -fx-background-color: transparent;
-    -fx-background-image: url('button_selected.png');
+    -fx-background-image: url('blue_button01.png');
+}
+
+.childPane
+{
+    -fx-background-size: 530 430;
+    -fx-background-position: center center;
+    -fx-background-image: url('blue_panel.png');
+    -fx-background-repeat: round;
 }

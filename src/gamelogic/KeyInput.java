@@ -35,8 +35,8 @@ public class KeyInput {
             player.move(0, Director.DOWN);
         }
 
-//        if (keyBoardInputs.contains(KeyCode.SPACE)) {
-//            player.placeBomb();
-//        }
+        if (keyBoardInputs.contains(KeyCode.SPACE)) {
+            player.placeBomb();
+        }
     }
 }

@@ -61,6 +61,28 @@ public class MapCreate {
         canvas.setWidth(CANVAS_WIDTH);
     }
 
+    public static void removeEntity() {
+        for (int i = 0; i < midLayer.size(); i++) {
+            if (midLayer.get(i).isRemoved()) {
+                midLayer.remove(i);
+                --i;
+            }
+        }
+
+        for (int i = 0; i < topLayer.size(); i++) {
+            if (topLayer.get(i).isRemoved()) {
+                topLayer.remove(i);
+                --i;
+            }
+        }
+        for (int i = 0; i < enemyLayer.size(); i++) {
+            if (enemyLayer.get(i).isRemoved()) {
+                enemyLayer.remove(i);
+                --i;
+            }
+        }
+    }
+
     public static List<Entity> getBoardLayer() {
         return boardLayer;
     }
@@ -96,7 +118,7 @@ public class MapCreate {
             //enemies
             case '1':
                 boardLayer.add(new Grass(x, y));
-                enemyLayer.add(new Ballom(x, y));
+                enemyLayer.add(new Balloon(x, y));
                 break;
             case '2':
                 boardLayer.add(new Grass(x, y));

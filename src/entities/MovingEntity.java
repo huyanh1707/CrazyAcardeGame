@@ -17,7 +17,6 @@ public abstract class MovingEntity extends AnimatedEntity {
     protected int aBigStep = Parameter.BLOCK_SIZE;
     protected int speed;
 
-
     public MovingEntity(int x, int y, Image image) {
         super(x, y, image);
         isMoving = false;

@@ -2,21 +2,43 @@ package entities;
 
 import constants.Parameter;
 import gamelogic.KeyInput;
+import entities.bomb.Bomb;
+import entities.enemies.Enemy;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 import gameplay.MapCreate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends MovingEntity {
 
     private static Player player = null;
 
+    private int bombCount = 1;
+    private int placedBombs;
     private int immortalTime = 100;
     private int lifeCount = 100;
+
+    private boolean ableToPassFlame = false;
+    private boolean ableToPassBomb = false;
     private static boolean canDie = false;
 
     private final int x_init, y_init;
 
     KeyInput input;
+
+    private final List<Bomb> bombList = new ArrayList<>();
+
+    public Player(int x, int y, Image player) {
+        super(x, y, player);
+        boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE - 10, Parameter.SCALED_SIZE - 2);
+        alive = true;
+        input = new KeyInput();
+        x_init = x;
+        y_init = y;
+        speed = 2;
+    }
 
     public Player(int x, int y) {
         super(x, y, Sprite.player_right);
@@ -44,6 +66,7 @@ public class Player extends MovingEntity {
 
     public void update() {
         animation();
+        recountBombs();
         playAnimation();
         try {
             input.playerKeyHandler();
@@ -103,6 +126,13 @@ public class Player extends MovingEntity {
     @Override
     public boolean checkFriendlyCollisions(int x, int y) {
         boundedBox.setPosition(x, y);
+        for (Entity entity : MapCreate.getTopLayer()) {
+            if (entity instanceof Bomb && isColliding(entity)
+                    && !((Bomb) entity).allowToPass() && !ableToPassBomb) {
+                boundedBox.setPosition(x_pos, y_pos);
+                return false;
+            }
+        }
         if (x < Parameter.BLOCK_SIZE || x > MapCreate.CANVAS_WIDTH - Parameter.BLOCK_SIZE) {
             boundedBox.setPosition(x_pos, y_pos);
             return false;
@@ -113,6 +143,22 @@ public class Player extends MovingEntity {
         }
         return super.checkFriendlyCollisions(x, y);
     }
+
+//    public void checkEnemyCollision() {
+//        for (Entity entity : MapCreate.getEnemyLayer()) {
+//            if (entity instanceof Enemy && isColliding(entity) && canDie) {
+//                revival();
+//                break;
+//            }
+//        }
+//        for (Entity entity : MapCreate.getTopLayer()) {
+//            if (entity instanceof Bomb && isColliding(entity)
+//                    && ((Bomb) entity).isExploded() && !ableToPassFlame) {
+//                revival();
+//                break;
+//            }
+//        }
+//    }
 
     private void revival() {
         if (lifeCount > 0) {
@@ -127,16 +173,44 @@ public class Player extends MovingEntity {
         }
     }
 
-    public int getX_node() {
-        return this.x_node;
+    public void placeBomb() {
+        int x_bomb = ((x_pos + Parameter.SCALED_SIZE / 2) / Parameter.SCALED_SIZE) * Parameter.SCALED_SIZE;
+        int y_bomb = ((y_pos + Parameter.SCALED_SIZE / 2) / Parameter.SCALED_SIZE) * Parameter.SCALED_SIZE;
+        boolean placeable = true;
+        for (Entity bomb : bombList) {
+            if (bomb.getX_pos() == x_bomb && bomb.getY_pos() == y_bomb) {
+                placeable = false;
+                break;
+            }
+        }
+        if (placedBombs < bombCount && placeable && alive) {
+            Bomb bomb = new Bomb(x_bomb, y_bomb);
+            MapCreate.getTopLayer().add(bomb);
+            bombList.add(bomb);
+            MapCreate.mapMatrix[y_bomb / Parameter.BLOCK_SIZE][x_bomb / Parameter.BLOCK_SIZE] = '*';
+        }
     }
 
-    public int getY_node() {
-        return this.y_node;
+    private void recountBombs() {
+        placedBombs = bombList.size();
+        for (int i = 0; i < bombList.size(); i++) {
+            if (bombList.get(i).isRemoved()) {
+                bombList.remove(i);
+                --i;
+            }
+        }
     }
 
     public int getSpeed() {
         return speed;
+    }
+
+    public int getX_node() {
+        return x_node;
+    }
+
+    public int getY_node() {
+        return y_node;
     }
 
     public Image getUpImage() {

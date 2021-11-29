@@ -37,16 +37,16 @@ public class Sprite {
     public static Image player_dead_1 = spriteImages[5][2];
     public static Image player_dead_2 = spriteImages[6][2];
 
-    // Ballom
-    public static Image ballom_left = spriteImages[9][0];
-    public static Image ballom_left_1 = spriteImages[9][1];
-    public static Image ballom_left_2 = spriteImages[9][2];
+    // Balloon
+    public static Image balloon_left = spriteImages[9][0];
+    public static Image balloon_left_1 = spriteImages[9][1];
+    public static Image balloon_left_2 = spriteImages[9][2];
 
-    public static Image ballom_right = spriteImages[10][0];
-    public static Image ballom_right_1 = spriteImages[10][1];
-    public static Image ballom_right_2 = spriteImages[10][2];
+    public static Image balloon_right = spriteImages[10][0];
+    public static Image balloon_right_1 = spriteImages[10][1];
+    public static Image balloon_right_2 = spriteImages[10][2];
 
-    public static Image ballom_dead = spriteImages[9][3];
+    public static Image balloon_dead = spriteImages[9][3];
 
     // Doll
     public static Image doll_left = spriteImages[13][0];
@@ -81,6 +81,14 @@ public class Sprite {
 
     public static Image oneal_dead = spriteImages[11][3];
 
+    //bomb
+    public static Image bomb = spriteImages[0][3];
+    public static Image bomb_1 = spriteImages[1][3];
+    public static Image bomb_2 = spriteImages[2][3];
+
+    public static Image bomb_exploded = spriteImages[0][4];
+    public static Image bomb_exploded_1 = spriteImages[0][5];
+    public static Image bomb_exploded_2 = spriteImages[0][6];
 
     public static Image playSpriteAnimation(Image image_0, Image image_1, Image image_2, int animate, int time) {
         int temp = animate % time;

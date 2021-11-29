@@ -36,6 +36,7 @@ public class GameLoop {
             MapCreate.getEnemyLayer().get(i).update();
         }
         Player.getPlayer().update();
+        MapCreate.removeEntity();
     }
 
     private static void renderGame(GraphicsContext graphicsContext) {
