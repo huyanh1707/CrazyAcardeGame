@@ -2,9 +2,12 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="624.0" prefWidth="851.0" stylesheets="@button.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.MenuController">
@@ -14,28 +17,28 @@
             <Image url="@bg.png" />
          </image>
       </ImageView>
-      <Button fx:id="PlayButton" layoutX="30.0" layoutY="164.0" mnemonicParsing="false" onMouseClicked="#PlayGame" prefHeight="53.0" prefWidth="218.0" text="Single Player">
+      <Button fx:id="SinglePlayerButton" layoutX="30.0" layoutY="164.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="218.0" text="Single Player">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <font>
             <Font name="Berlin Sans FB" size="20.0" />
          </font></Button>
-      <Button fx:id="Button2" layoutX="30.0" layoutY="251.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="218.0" text="Multiplayer">
+      <Button fx:id="MultiplayerButton" layoutX="30.0" layoutY="251.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="218.0" text="Multiplayer">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <font>
             <Font name="Berlin Sans FB" size="20.0" />
          </font></Button>
-      <Button fx:id="Button3" layoutX="30.0" layoutY="344.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="218.0" text="Choose Map">
+      <Button fx:id="Button3" layoutX="30.0" layoutY="438.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="218.0" text="Control">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <font>
             <Font name="Berlin Sans FB" size="20.0" />
          </font></Button>
-      <Button fx:id="TutorialButton" layoutX="30.0" layoutY="438.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="218.0" text="Tutorial">
+      <Button fx:id="TutorialButton" layoutX="30.0" layoutY="344.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="218.0" text="Tutorial">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -49,11 +52,75 @@
          <font>
             <Font name="Berlin Sans FB" size="20.0" />
          </font></Button>
-      <AnchorPane fx:id="GamePane" layoutX="1000.0" layoutY="165.0" prefHeight="430.0" prefWidth="530.0" scaleShape="false" styleClass="childPane" />
-      <AnchorPane fx:id="Pane2" layoutX="1000.0" layoutY="165.0" prefHeight="430.0" prefWidth="530.0" scaleShape="false" styleClass="childPane" />
-      <AnchorPane fx:id="Pane3" layoutX="1000.0" layoutY="165.0" prefHeight="430.0" prefWidth="530.0" scaleShape="false" styleClass="childPane" />
-      <AnchorPane fx:id="TutorialPane" layoutX="1000.0" layoutY="165.0" prefHeight="430.0" prefWidth="530.0" scaleShape="false" styleClass="childPane" />
-      <AnchorPane fx:id="PaneToHide" layoutX="1000.0" layoutY="165.0" prefHeight="430.0" prefWidth="530.0" scaleShape="false" styleClass="childPane" />
+      <AnchorPane fx:id="Pane2" layoutX="1000.0" layoutY="165.0" prefHeight="430.0" prefWidth="530.0" scaleShape="false" styleClass="childPane">
+         <children>
+            <Label text="Pane2" />
+            <Button fx:id="MultiplayerButton1" layoutX="286.0" layoutY="362.0" mnemonicParsing="false" onMouseClicked="#PlayMultiPlayerGame" prefHeight="53.0" prefWidth="218.0" text="Play Game">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Berlin Sans FB" size="20.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+      <AnchorPane fx:id="Pane3" layoutX="1000.0" layoutY="165.0" prefHeight="430.0" prefWidth="530.0" scaleShape="false" styleClass="childPane">
+         <children>
+            <Label text="Pane3" />
+         </children></AnchorPane>
+      <AnchorPane fx:id="TutorialPane" layoutX="1000.0" layoutY="165.0" prefHeight="430.0" prefWidth="530.0" scaleShape="false" styleClass="childPane">
+         <children>
+            <Label text="Tutorial" />
+         </children></AnchorPane>
+      <AnchorPane fx:id="GamePane" layoutX="1000.0" layoutY="165.0" prefHeight="430.0" prefWidth="530.0" scaleShape="false" styleClass="childPane">
+         <children>
+            <ImageView fitHeight="46.0" fitWidth="367.0" layoutX="83.0" layoutY="14.0" pickOnBounds="true">
+               <image>
+                  <Image url="@blue_button13.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="92.0" layoutY="19.0" prefHeight="33.0" prefWidth="347.0" text="Choose Your Character">
+               <font>
+                  <Font name="Berlin Sans FB" size="24.0" />
+               </font>
+            </Label>
+            <Line endX="324.0" endY="9.33331298828125" layoutX="165.0" layoutY="205.0" startX="-104.6666259765625" startY="9.33331298828125" />
+            <Button fx:id="PlayButton" layoutX="287.0" layoutY="362.0" mnemonicParsing="false" onMouseClicked="#PlayGame" prefHeight="53.0" prefWidth="218.0" text="Play Game">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Berlin Sans FB" size="20.0" />
+               </font>
+            </Button>
+            <RadioButton fx:id="blue" layoutX="90.0" layoutY="100.0" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@character/default.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </RadioButton>
+            <RadioButton fx:id="red" layoutX="230.0" layoutY="100.0" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@character/default1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </RadioButton>
+            <RadioButton fx:id="green" layoutX="354.0" layoutY="100.0" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@character/default2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </RadioButton>
+         </children></AnchorPane>
       <ImageView fitHeight="170.0" fitWidth="548.0" layoutX="291.0" layoutY="-3.0" pickOnBounds="true" smooth="false">
          <image>
             <Image url="@title.png" />

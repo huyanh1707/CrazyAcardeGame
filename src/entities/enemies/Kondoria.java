@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 
 public class Kondoria extends Enemy {
 
-
     public Kondoria(int x, int y, Image kondoria) {
         super(x, y, kondoria);
         ableToPassBrick = true;

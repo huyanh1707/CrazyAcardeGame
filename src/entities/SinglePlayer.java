@@ -3,7 +3,6 @@ package entities;
 import constants.Parameter;
 import gamelogic.KeyInput;
 import entities.bomb.Bomb;
-import entities.enemies.Enemy;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 import gameplay.MapCreate;
@@ -11,9 +10,9 @@ import gameplay.MapCreate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player extends MovingEntity {
+public class SinglePlayer extends MovingEntity {
 
-    private static Player player = null;
+    private static SinglePlayer player = null;
 
     private int bombCount = 1;
     private int placedBombs;
@@ -30,7 +29,7 @@ public class Player extends MovingEntity {
 
     private final List<Bomb> bombList = new ArrayList<>();
 
-    public Player(int x, int y, Image player) {
+    public SinglePlayer(int x, int y, Image player) {
         super(x, y, player);
         boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE - 10, Parameter.SCALED_SIZE - 2);
         alive = true;
@@ -40,7 +39,7 @@ public class Player extends MovingEntity {
         speed = 2;
     }
 
-    public Player(int x, int y) {
+    public SinglePlayer(int x, int y) {
         super(x, y, Sprite.player_right);
         boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE - 10, Parameter.SCALED_SIZE - 2);
         alive = true;
@@ -50,9 +49,9 @@ public class Player extends MovingEntity {
         speed = 2;
     }
 
-    public static Player setPlayer(int x, int y, boolean newOne) {
+    public static SinglePlayer setPlayer(int x, int y, boolean newOne) {
         if (player == null || newOne) {
-            player = new Player(x, y);
+            player = new SinglePlayer(x, y);
         } else {
             player.setPosition(x, y);
         }
@@ -60,7 +59,7 @@ public class Player extends MovingEntity {
         return player;
     }
 
-    public static Player getPlayer() {
+    public static SinglePlayer getPlayer() {
         return player;
     }
 

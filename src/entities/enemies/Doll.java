@@ -19,7 +19,6 @@ public class Doll extends Enemy {
                 ableToPassBrick, ableToPassWall);
     }
 
-
     public void playAnimation() {
         if (alive) {
             switch (currentDirection) {

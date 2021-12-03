@@ -1,7 +1,8 @@
 package entities.enemies;
 
 import constants.Director;
-import entities.Player;
+import entities.SinglePlayer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +10,13 @@ public class MovingEnemy {
     private MovingEnemy.IQ iq;
     private boolean wallPass;
     private boolean brickPass;
-    private Player player;
+    private SinglePlayer player;
 
     public MovingEnemy(MovingEnemy.IQ iq, boolean brickPass, boolean wallPass) {
         this.iq = iq;
         this.wallPass = wallPass;
         this.brickPass = brickPass;
-        this.player = Player.getPlayer();
+        this.player = SinglePlayer.getPlayer();
     }
 
     class Node {

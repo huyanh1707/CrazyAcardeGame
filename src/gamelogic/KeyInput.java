@@ -1,7 +1,7 @@
 package gamelogic;
 
 import constants.Director;
-import entities.Player;
+import entities.SinglePlayer;
 import javafx.scene.input.KeyCode;
 
 import java.util.List;
@@ -10,7 +10,7 @@ public class KeyInput {
 
     public void playerKeyHandler() {
         List<KeyCode> keyBoardInputs = KeyController.getPlayerController();
-        Player player = Player.getPlayer();
+        SinglePlayer player = SinglePlayer.getPlayer();
 
         if (keyBoardInputs.contains(KeyCode.UP) || keyBoardInputs.contains(KeyCode.W)) {
             player.move(player.getSpeed(), Director.UP);

@@ -16,7 +16,7 @@ public class Sprite {
     public static Image brick_exploded_1 = spriteImages[7][2];
     public static Image brick_exploded_2 = spriteImages[7][3];
 
-    // Player
+    // SinglePlayer
     public static Image player_up = spriteImages[0][0];
     public static Image player_up_1 = spriteImages[0][1];
     public static Image player_up_2 = spriteImages[0][2];

@@ -4,11 +4,9 @@ import constants.Parameter;
 import entities.block.Brick;
 import entities.block.Grass;
 import entities.block.Wall;
-import entities.enemies.*;
 import gamelogic.KeyController;
-import gamelogic.GameLoop;
 import entities.*;
-import javafx.animation.AnimationTimer;
+import gamelogic.MultiPlayerGameLoop;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,38 +20,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class MapCreate {
+public class MultiPlayerMapCreate {
     static Canvas canvas;
     static GraphicsContext graphicsContext;
-    static SinglePlayer player;
+    static SinglePlayer player1;
+    static SinglePlayer player2;
 
     public static char[][] myMap;
     public static char[][] mapMatrix;
     private static final List<Entity> boardLayer = new ArrayList<>();
     private static final List<Entity> topLayer = new ArrayList<>();
     private static final List<Entity> midLayer = new ArrayList<>();
-    private static final List<Enemy> enemyLayer = new ArrayList<>();
 
     public static int mapWidth;
     public static int mapHeight;
-    public static int mapLevel;
     public static int CANVAS_WIDTH;
     public static int CANVAS_HEIGHT;
-    public static boolean pause;
 
-    public static void initGame(Pane root, Scene scene) {
-        pause = false;
+    public static void initMPGame(Pane root, Scene scene) {
         canvas = new Canvas();
         root.getChildren().addAll(canvas);
         graphicsContext = canvas.getGraphicsContext2D();
-        createLevel(1);
-        GameLoop.start(graphicsContext);
+        createLevel();
+        MultiPlayerGameLoop.start(graphicsContext);
         KeyController.setOnKeys(scene);
     }
 
-    public static void createLevel(int level) {
-        clearMap();
-        loadMapFile("/levels/Level" + level + ".txt");
+    public static void createLevel() {
+        loadMapFile("/levels/MultiPlayerMap.txt");
         for (int i = 0; i < mapHeight; i++) {
             for (int j = 0; j < mapWidth; j++) {
                 char c = myMap[i][j];
@@ -71,15 +65,10 @@ public class MapCreate {
                 --i;
             }
         }
+
         for (int i = 0; i < topLayer.size(); i++) {
             if (topLayer.get(i).isRemoved()) {
                 topLayer.remove(i);
-                --i;
-            }
-        }
-        for (int i = 0; i < enemyLayer.size(); i++) {
-            if (enemyLayer.get(i).isRemoved()) {
-                enemyLayer.remove(i);
                 --i;
             }
         }
@@ -93,9 +82,6 @@ public class MapCreate {
     }
     public static List<Entity> getTopLayer() {
         return topLayer;
-    }
-    public static List<Enemy> getEnemyLayer() {
-        return enemyLayer;
     }
 
     public static void addEntity(char c, int x, int y) {
@@ -113,35 +99,17 @@ public class MapCreate {
                 break;
             case 'p':
                 boardLayer.add(new Grass(x, y));
-                player = SinglePlayer.setPlayer(x, y, false);
-                break;
-            //enemies
-            case '1':
-                boardLayer.add(new Grass(x, y));
-                enemyLayer.add(new Balloon(x, y));
-                break;
-            case '2':
-                boardLayer.add(new Grass(x, y));
-                enemyLayer.add(new Oneal(x, y));
-                break;
-            case '3':
-                boardLayer.add(new Grass(x, y));
-                enemyLayer.add(new Doll(x, y));
-                break;
-            case '4':
-                boardLayer.add(new Grass(x, y));
-                enemyLayer.add(new Kondoria(x, y));
+                player1 = SinglePlayer.setPlayer(x, y, false);
                 break;
         }
     }
 
     public static void loadMapFile(String filePath) {
         try {
-            URL fileMapPath = MapCreate.class.getResource(filePath);
+            URL fileMapPath = MultiPlayerMapCreate.class.getResource(filePath);
             BufferedReader reader = new BufferedReader(new InputStreamReader(fileMapPath.openStream()));
             String data = reader.readLine();
             StringTokenizer tokens = new StringTokenizer(data);
-            mapLevel = Integer.parseInt(tokens.nextToken());
             mapHeight = Integer.parseInt(tokens.nextToken());
             mapWidth = Integer.parseInt(tokens.nextToken());
             CANVAS_HEIGHT = mapHeight * Parameter.BLOCK_SIZE;
@@ -164,13 +132,5 @@ public class MapCreate {
         } catch (IOException e) {
             e.fillInStackTrace();
         }
-    }
-
-    public static void clearMap() {
-        graphicsContext.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        enemyLayer.clear();
-        topLayer.clear();
-        midLayer.clear();
-        boardLayer.clear();
     }
 }

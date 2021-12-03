@@ -1,12 +1,9 @@
 package entities.bomb;
 
 import constants.Parameter;
-import constants.Director;
 import entities.AnimatedEntity;
-import entities.Entity;
 import entities.RectangleBox;
-import entities.block.Brick;
-import entities.Player;
+import entities.SinglePlayer;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 import gameplay.MapCreate;
@@ -65,7 +62,7 @@ public class Bomb extends AnimatedEntity {
     }
 
     public void setAllowToPass() {
-        if (!isColliding(Player.getPlayer())) {
+        if (!isColliding(SinglePlayer.getPlayer())) {
             allowToPass = false;
         }
     }
