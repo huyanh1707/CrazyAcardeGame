@@ -1,9 +1,10 @@
 package entities.bomb;
 
+import constants.Director;
 import constants.Parameter;
 import entities.AnimatedEntity;
+import entities.Player;
 import entities.RectangleBox;
-import entities.SinglePlayer;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 import gameplay.MapCreate;
@@ -16,6 +17,12 @@ public class Bomb extends AnimatedEntity {
     private boolean allowToPass = true;
 
     private boolean exploded = false;
+
+    private ExplosionDirection[] explosions;
+
+    private BombExplosion explosion;
+
+    private final int explosionTime = 50;
 
     public Bomb(int x, int y, Image boom) {
         super(x, y, boom);
@@ -32,6 +39,7 @@ public class Bomb extends AnimatedEntity {
             countDownTime--;
         } else {
             if (!exploded) {
+                setExplosions();
                 exploded = true;
             }
             if (removeTime > 0) {
@@ -62,12 +70,27 @@ public class Bomb extends AnimatedEntity {
     }
 
     public void setAllowToPass() {
-        if (!isColliding(SinglePlayer.getPlayer())) {
+        if (!isColliding(Player.getPlayer())) {
             allowToPass = false;
         }
     }
 
     public boolean allowToPass() {
         return allowToPass;
+    }
+
+    public void setExplosions() {
+
+        explosions = new ExplosionDirection[4];
+//        Entity entity = MapCreate.getFixedEntityAt(x_pos, y_pos);
+//        if (entity instanceof Brick) {
+//            ((Brick) entity).setExploded();
+//        }
+        for (int i = 0; i < explosions.length; i++) {
+            explosions[i] = new ExplosionDirection(x_pos, y_pos, Director.dir[i], Player.getPlayer().getBombRadius());
+            for (int j = 0; j < explosions[i].getExplosions().length; j++) {
+                MapCreate.getTopLayer().add(explosions[i].getExplosions()[j]);
+            }
+        }
     }
 }

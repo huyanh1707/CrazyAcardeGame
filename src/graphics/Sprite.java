@@ -11,12 +11,13 @@ public class Sprite {
     public static Image wall = spriteImages[5][0];
     public static Image grass = spriteImages[6][0];
     public static Image brick = spriteImages[7][0];
+    public static Image transparent = spriteImages[15][15];
 
     public static Image brick_exploded = spriteImages[7][1];
     public static Image brick_exploded_1 = spriteImages[7][2];
     public static Image brick_exploded_2 = spriteImages[7][3];
 
-    // SinglePlayer
+    // Player
     public static Image player_up = spriteImages[0][0];
     public static Image player_up_1 = spriteImages[0][1];
     public static Image player_up_2 = spriteImages[0][2];
@@ -89,6 +90,30 @@ public class Sprite {
     public static Image bomb_exploded = spriteImages[0][4];
     public static Image bomb_exploded_1 = spriteImages[0][5];
     public static Image bomb_exploded_2 = spriteImages[0][6];
+
+    public static Image explosion_vertical = spriteImages[1][5];
+    public static Image explosion_vertical_1 = spriteImages[2][5];
+    public static Image explosion_vertical_2 = spriteImages[3][5];
+
+    public static Image explosion_horizontal = spriteImages[1][7];
+    public static Image explosion_horizontal_1 = spriteImages[1][8];
+    public static Image explosion_horizontal_2 = spriteImages[1][9];
+
+    public static Image explosion_horizontal_left_last = spriteImages[0][7];
+    public static Image explosion_horizontal_left_last_1 = spriteImages[0][8];
+    public static Image explosion_horizontal_left_last_2 = spriteImages[0][9];
+
+    public static Image explosion_horizontal_right_last = spriteImages[2][7];
+    public static Image explosion_horizontal_right_last_1 = spriteImages[2][8];
+    public static Image explosion_horizontal_right_last_2 = spriteImages[2][9];
+
+    public static Image explosion_vertical_top_last = spriteImages[1][4];
+    public static Image explosion_vertical_top_last_1 = spriteImages[2][4];
+    public static Image explosion_vertical_top_last_2 = spriteImages[3][4];
+
+    public static Image explosion_vertical_down_last = spriteImages[1][6];
+    public static Image explosion_vertical_down_last_1 = spriteImages[2][6];
+    public static Image explosion_vertical_down_last_2 = spriteImages[3][6];
 
     public static Image playSpriteAnimation(Image image_0, Image image_1, Image image_2, int animate, int time) {
         int temp = animate % time;

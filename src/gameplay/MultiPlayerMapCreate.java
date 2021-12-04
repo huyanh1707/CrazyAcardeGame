@@ -23,8 +23,8 @@ import java.util.StringTokenizer;
 public class MultiPlayerMapCreate {
     static Canvas canvas;
     static GraphicsContext graphicsContext;
-    static SinglePlayer player1;
-    static SinglePlayer player2;
+    static Player player1;
+    static Player player2;
 
     public static char[][] myMap;
     public static char[][] mapMatrix;
@@ -86,7 +86,7 @@ public class MultiPlayerMapCreate {
 
     public static void addEntity(char c, int x, int y) {
         switch (c) {
-            // background and SinglePlayer
+            // background and Player
             case '#':
                 boardLayer.add(new Wall(x, y));
                 break;
@@ -99,7 +99,7 @@ public class MultiPlayerMapCreate {
                 break;
             case 'p':
                 boardLayer.add(new Grass(x, y));
-                player1 = SinglePlayer.setPlayer(x, y, false);
+                player1 = Player.setPlayer(x, y, false);
                 break;
         }
     }

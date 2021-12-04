@@ -8,7 +8,6 @@ import entities.enemies.*;
 import gamelogic.KeyController;
 import gamelogic.GameLoop;
 import entities.*;
-import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -25,7 +24,7 @@ import java.util.StringTokenizer;
 public class MapCreate {
     static Canvas canvas;
     static GraphicsContext graphicsContext;
-    static SinglePlayer player;
+    static Player player;
 
     public static char[][] myMap;
     public static char[][] mapMatrix;
@@ -47,6 +46,7 @@ public class MapCreate {
         root.getChildren().addAll(canvas);
         graphicsContext = canvas.getGraphicsContext2D();
         createLevel(1);
+        System.out.println("enemyLayer  " + enemyLayer.size());
         GameLoop.start(graphicsContext);
         KeyController.setOnKeys(scene);
     }
@@ -71,6 +71,7 @@ public class MapCreate {
                 --i;
             }
         }
+
         for (int i = 0; i < topLayer.size(); i++) {
             if (topLayer.get(i).isRemoved()) {
                 topLayer.remove(i);
@@ -88,19 +89,23 @@ public class MapCreate {
     public static List<Entity> getBoardLayer() {
         return boardLayer;
     }
+
     public static List<Entity> getMidLayer() {
         return midLayer;
     }
+
     public static List<Entity> getTopLayer() {
         return topLayer;
     }
+
     public static List<Enemy> getEnemyLayer() {
         return enemyLayer;
     }
 
+
     public static void addEntity(char c, int x, int y) {
         switch (c) {
-            // background and SinglePlayer
+            // background and Player
             case '#':
                 boardLayer.add(new Wall(x, y));
                 break;
@@ -113,8 +118,9 @@ public class MapCreate {
                 break;
             case 'p':
                 boardLayer.add(new Grass(x, y));
-                player = SinglePlayer.setPlayer(x, y, false);
+                player = Player.setPlayer(x, y, false);
                 break;
+
             //enemies
             case '1':
                 boardLayer.add(new Grass(x, y));
@@ -172,5 +178,19 @@ public class MapCreate {
         topLayer.clear();
         midLayer.clear();
         boardLayer.clear();
+    }
+
+    public static Entity getFixedEntityAt(int x, int y) {
+        for (Entity entity : boardLayer) {
+            if (entity instanceof Wall && entity.getX_pos() == x && entity.getY_pos() == y) {
+                return entity;
+            }
+        }
+        for (Entity entity : topLayer) {
+            if (entity instanceof Brick && entity.getX_pos() == x && entity.getY_pos() == y) {
+                return entity;
+            }
+        }
+        return null;
     }
 }

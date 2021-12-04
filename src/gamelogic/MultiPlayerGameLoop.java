@@ -2,7 +2,7 @@ package gamelogic;
 
 import constants.Parameter;
 import entities.Entity;
-import entities.SinglePlayer;
+import entities.Player;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import gameplay.MultiPlayerMapCreate;
@@ -30,7 +30,7 @@ public class MultiPlayerGameLoop {
         for (int i = 0; i < MultiPlayerMapCreate.getTopLayer().size(); i++) {
             MultiPlayerMapCreate.getTopLayer().get(i).update();
         }
-        SinglePlayer.getPlayer().update();
+        Player.getPlayer().update();
         MultiPlayerMapCreate.removeEntity();
     }
 
@@ -44,6 +44,6 @@ public class MultiPlayerGameLoop {
         for (Entity entity : MultiPlayerMapCreate.getTopLayer()) {
             entity.render(graphicsContext);
         }
-        SinglePlayer.getPlayer().render(graphicsContext);
+        Player.getPlayer().render(graphicsContext);
     }
 }

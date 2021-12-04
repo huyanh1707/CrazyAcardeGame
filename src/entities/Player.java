@@ -10,11 +10,12 @@ import gameplay.MapCreate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SinglePlayer extends MovingEntity {
+public class Player extends MovingEntity {
 
-    private static SinglePlayer player = null;
+    private static Player player = null;
 
     private int bombCount = 1;
+    private int bombRadius = 1;
     private int placedBombs;
     private int immortalTime = 100;
     private int lifeCount = 100;
@@ -29,7 +30,7 @@ public class SinglePlayer extends MovingEntity {
 
     private final List<Bomb> bombList = new ArrayList<>();
 
-    public SinglePlayer(int x, int y, Image player) {
+    public Player(int x, int y, Image player) {
         super(x, y, player);
         boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE - 10, Parameter.SCALED_SIZE - 2);
         alive = true;
@@ -39,7 +40,7 @@ public class SinglePlayer extends MovingEntity {
         speed = 2;
     }
 
-    public SinglePlayer(int x, int y) {
+    public Player(int x, int y) {
         super(x, y, Sprite.player_right);
         boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE - 10, Parameter.SCALED_SIZE - 2);
         alive = true;
@@ -49,9 +50,9 @@ public class SinglePlayer extends MovingEntity {
         speed = 2;
     }
 
-    public static SinglePlayer setPlayer(int x, int y, boolean newOne) {
+    public static Player setPlayer(int x, int y, boolean newOne) {
         if (player == null || newOne) {
-            player = new SinglePlayer(x, y);
+            player = new Player(x, y);
         } else {
             player.setPosition(x, y);
         }
@@ -59,7 +60,7 @@ public class SinglePlayer extends MovingEntity {
         return player;
     }
 
-    public static SinglePlayer getPlayer() {
+    public static Player getPlayer() {
         return player;
     }
 
@@ -210,6 +211,10 @@ public class SinglePlayer extends MovingEntity {
 
     public int getY_node() {
         return y_node;
+    }
+
+    public int getBombRadius() {
+        return bombRadius;
     }
 
     public Image getUpImage() {
