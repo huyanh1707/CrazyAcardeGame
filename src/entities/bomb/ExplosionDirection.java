@@ -46,7 +46,11 @@ public class ExplosionDirection {
                     break;
             }
             Entity entity = MapCreate.getFixedEntityAt(x, y);
-            if (entity instanceof Wall || entity instanceof Brick) {
+            if (entity instanceof Wall) {
+                break;
+            }
+            if (entity instanceof Brick) {
+                ((Brick) entity).setExploded();
                 break;
             }
             r++;

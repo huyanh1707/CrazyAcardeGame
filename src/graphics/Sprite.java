@@ -115,6 +115,15 @@ public class Sprite {
     public static Image explosion_vertical_down_last_1 = spriteImages[2][6];
     public static Image explosion_vertical_down_last_2 = spriteImages[3][6];
 
+    // Powerup items
+    public static Image powerup_bombs = spriteImages[0][10];
+    public static Image powerup_flames = spriteImages[1][10];
+    public static Image powerup_speed = spriteImages[2][10];
+    public static Image powerup_wallpass = spriteImages[3][10];
+    public static Image powerup_detonator = spriteImages[4][10];
+    public static Image powerup_bombpass = spriteImages[5][10];
+    public static Image powerup_flamepass = spriteImages[6][10];
+
     public static Image playSpriteAnimation(Image image_0, Image image_1, Image image_2, int animate, int time) {
         int temp = animate % time;
         int delta = time / 3;

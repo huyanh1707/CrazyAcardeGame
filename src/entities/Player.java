@@ -16,6 +16,7 @@ public class Player extends MovingEntity {
 
     private int bombCount = 1;
     private int bombRadius = 1;
+    private int speed = 2;
     private int placedBombs;
     private int immortalTime = 100;
     private int lifeCount = 100;
@@ -37,7 +38,6 @@ public class Player extends MovingEntity {
         input = new KeyInput();
         x_init = x;
         y_init = y;
-        speed = 2;
     }
 
     public Player(int x, int y) {
@@ -47,7 +47,6 @@ public class Player extends MovingEntity {
         input = new KeyInput();
         x_init = x;
         y_init = y;
-        speed = 2;
     }
 
     public static Player setPlayer(int x, int y, boolean newOne) {
@@ -201,10 +200,6 @@ public class Player extends MovingEntity {
         }
     }
 
-    public int getSpeed() {
-        return speed;
-    }
-
     public int getX_node() {
         return x_node;
     }
@@ -215,6 +210,38 @@ public class Player extends MovingEntity {
 
     public int getBombRadius() {
         return bombRadius;
+    }
+
+    public void increaseFlames() {
+        bombRadius++;
+    }
+
+    public void resetFlames() {
+        bombRadius = 1;
+    }
+
+    public int getBombCount() {
+        return bombCount;
+    }
+
+    public void increaseBombs() {
+        bombCount++;
+    }
+
+    public void resetBombCount() {
+        bombCount = 1;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void resetSpeed() {
+        speed = 2;
+    }
+
+    public void increaseSpeed() {
+        speed ++;
     }
 
     public Image getUpImage() {
@@ -232,4 +259,5 @@ public class Player extends MovingEntity {
     public Image getLeftImage() {
         return Sprite.player_left;
     }
+
 }

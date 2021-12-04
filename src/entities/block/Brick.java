@@ -47,4 +47,8 @@ public class Brick extends AnimatedEntity {
         playAnimation();
     }
 
+    public void setExploded() {
+        exploded = true;
+    }
+
 }

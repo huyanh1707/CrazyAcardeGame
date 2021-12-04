@@ -5,6 +5,9 @@ import entities.block.Brick;
 import entities.block.Grass;
 import entities.block.Wall;
 import entities.enemies.*;
+import entities.powerup.PowerupBombs;
+import entities.powerup.PowerupFlames;
+import entities.powerup.PowerupSpeed;
 import gamelogic.KeyController;
 import gamelogic.GameLoop;
 import entities.*;
@@ -137,6 +140,23 @@ public class MapCreate {
             case '4':
                 boardLayer.add(new Grass(x, y));
                 enemyLayer.add(new Kondoria(x, y));
+                break;
+
+            // Powerup
+            case 'b':
+                boardLayer.add(new Grass(x, y));
+                midLayer.add(new PowerupBombs(x,y));
+                topLayer.add(new Brick(x, y));
+                break;
+            case 'f':
+                boardLayer.add(new Grass(x, y));
+                midLayer.add(new PowerupFlames(x,y));
+                topLayer.add(new Brick(x, y));
+                break;
+            case 's':
+                boardLayer.add(new Grass(x, y));
+                midLayer.add(new PowerupSpeed(x,y));
+                topLayer.add(new Brick(x, y));
                 break;
         }
     }

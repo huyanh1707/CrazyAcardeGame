@@ -19,6 +19,10 @@ public class GameLoop {
                 renderGame(graphicsContext);
                 if(MapCreate.pause) {
                     stop();
+
+                    Player.getPlayer().resetBombCount();
+                    Player.getPlayer().resetFlames();
+                    Player.getPlayer().resetSpeed();
                 }
             }
         };
