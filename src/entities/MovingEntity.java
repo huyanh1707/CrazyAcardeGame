@@ -10,7 +10,7 @@ import gameplay.MapCreate;
 public abstract class MovingEntity extends AnimatedEntity {
     protected Director currentDirection;
     protected boolean isMoving;
-    protected boolean alive;
+    public boolean alive;
     protected boolean ableToPassWall = false;
     protected boolean ableToPassBrick = false;
     protected int passAwayTime = 30;

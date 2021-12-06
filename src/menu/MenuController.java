@@ -45,7 +45,7 @@ public class MenuController implements Initializable {
         Stage gameStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Pane appRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gameview/GameMPView.fxml")));
         Scene scene = new Scene(appRoot);
-        MultiPlayerMapCreate.initMPGame(appRoot, scene);
+        MapCreate.initMultiPlayerGame(appRoot, scene);
         gameStage.setScene(scene);
         gameStage.centerOnScreen();
         gameStage.show();

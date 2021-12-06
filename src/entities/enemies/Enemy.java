@@ -9,12 +9,17 @@ import javafx.scene.image.Image;
 import java.util.Iterator;
 
 public abstract class Enemy extends MovingEntity {
+    protected int score;
     protected MovingEnemy movingEnemy;
 
     public Enemy(int x, int y, Image image) {
         super(x, y, image);
         this.boundedBox = new RectangleBox(x, y, 48, 48);
         this.alive = true;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public void update() {
@@ -26,9 +31,7 @@ public abstract class Enemy extends MovingEntity {
                 this.remove();
             }
         }
-
         this.playAnimation();
-
         try {
             this.enemySmartMoving();
         } catch (Exception var2) {
@@ -73,9 +76,7 @@ public abstract class Enemy extends MovingEntity {
                 case RIGHT:
                     ++this.x_node;
             }
-
             this.currentDirection = this.movingEnemy.movingDirection(MapCreate.mapMatrix, this.x_node, this.y_node);
         }
-
     }
 }

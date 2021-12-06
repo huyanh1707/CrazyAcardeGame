@@ -4,6 +4,8 @@ import constants.Parameter;
 import entities.block.Brick;
 import entities.block.Grass;
 import entities.block.Wall;
+import entities.bomb.Bomb;
+import entities.bomb.Bomb2;
 import entities.enemies.*;
 import entities.powerup.PowerupBombs;
 import entities.powerup.PowerupFlames;
@@ -11,6 +13,7 @@ import entities.powerup.PowerupSpeed;
 import gamelogic.KeyController;
 import gamelogic.GameLoop;
 import entities.*;
+import gamelogic.MultiPlayerGameLoop;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,41 +25,69 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 public class MapCreate {
     static Canvas canvas;
     static GraphicsContext graphicsContext;
     static Player player;
-
-    public static char[][] myMap;
-    public static char[][] mapMatrix;
-    private static final List<Entity> boardLayer = new ArrayList<>();
-    private static final List<Entity> topLayer = new ArrayList<>();
-    private static final List<Entity> midLayer = new ArrayList<>();
-    private static final List<Enemy> enemyLayer = new ArrayList<>();
+    static Player2 player2;
 
     public static int mapWidth;
     public static int mapHeight;
     public static int mapLevel;
     public static int CANVAS_WIDTH;
     public static int CANVAS_HEIGHT;
-    public static boolean pause;
+    public static boolean pause1 = false;
+    public static boolean pause2 = false;
+    public static char[][] myMap;
+    public static char[][] mapMatrix;
+
+    public static int currentLevel = 1;
+    public static int gameScore = 0;
+
+    private static final List<Entity> boardLayer = new ArrayList<>();
+    private static final List<Entity> topLayer = new ArrayList<>();
+    private static final List<Entity> midLayer = new ArrayList<>();
+    private static final List<Enemy> enemyLayer = new ArrayList<>();
 
     public static void initGame(Pane root, Scene scene) {
-        pause = false;
+        pause1 = false;
         canvas = new Canvas();
         root.getChildren().addAll(canvas);
         graphicsContext = canvas.getGraphicsContext2D();
-        createLevel(1);
-        System.out.println("enemyLayer  " + enemyLayer.size());
+        createLevel(currentLevel);
         GameLoop.start(graphicsContext);
+        KeyController.setOnKeys(scene);
+    }
+
+    public static void initMultiPlayerGame(Pane root, Scene scene) {
+        pause2 = false;
+        canvas = new Canvas();
+        root.getChildren().addAll(canvas);
+        graphicsContext = canvas.getGraphicsContext2D();
+        createMultiPlayerLevel();
+        MultiPlayerGameLoop.multiplayerStart(graphicsContext);
         KeyController.setOnKeys(scene);
     }
 
     public static void createLevel(int level) {
         clearMap();
         loadMapFile("/levels/Level" + level + ".txt");
+        for (int i = 0; i < mapHeight; i++) {
+            for (int j = 0; j < mapWidth; j++) {
+                char c = myMap[i][j];
+                addEntity(c, j * Parameter.SCALED_SIZE, i * Parameter.SCALED_SIZE);
+            }
+        }
+        canvas.setHeight(CANVAS_HEIGHT);
+        canvas.setWidth(CANVAS_WIDTH);
+    }
+
+    public static void createMultiPlayerLevel() {
+        clearMap();
+        loadMapFile("/levels/MultiPlayerMap.txt");
         for (int i = 0; i < mapHeight; i++) {
             for (int j = 0; j < mapWidth; j++) {
                 char c = myMap[i][j];
@@ -83,6 +114,7 @@ public class MapCreate {
         }
         for (int i = 0; i < enemyLayer.size(); i++) {
             if (enemyLayer.get(i).isRemoved()) {
+                gameScore += enemyLayer.get(i).getScore();
                 enemyLayer.remove(i);
                 --i;
             }
@@ -123,7 +155,10 @@ public class MapCreate {
                 boardLayer.add(new Grass(x, y));
                 player = Player.setPlayer(x, y, false);
                 break;
-
+            case 'q':
+                boardLayer.add(new Grass(x, y));
+                player2 = Player2.setPlayer(x, y, false);
+                break;
             //enemies
             case '1':
                 boardLayer.add(new Grass(x, y));
@@ -141,8 +176,7 @@ public class MapCreate {
                 boardLayer.add(new Grass(x, y));
                 enemyLayer.add(new Kondoria(x, y));
                 break;
-
-            // Powerup
+            // Power up
             case 'b':
                 boardLayer.add(new Grass(x, y));
                 midLayer.add(new PowerupBombs(x,y));
@@ -164,7 +198,7 @@ public class MapCreate {
     public static void loadMapFile(String filePath) {
         try {
             URL fileMapPath = MapCreate.class.getResource(filePath);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fileMapPath.openStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(fileMapPath).openStream()));
             String data = reader.readLine();
             StringTokenizer tokens = new StringTokenizer(data);
             mapLevel = Integer.parseInt(tokens.nextToken());

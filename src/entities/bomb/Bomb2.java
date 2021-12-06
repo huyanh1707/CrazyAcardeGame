@@ -3,18 +3,17 @@ package entities.bomb;
 import constants.Director;
 import constants.Parameter;
 import entities.AnimatedEntity;
-import entities.Entity;
 import entities.Player;
+import entities.Player2;
 import entities.RectangleBox;
-import entities.block.Brick;
+import gameplay.MapCreate;
 import graphics.Sprite;
 import javafx.scene.image.Image;
-import gameplay.MapCreate;
 
-public class Bomb extends AnimatedEntity {
+public class Bomb2 extends AnimatedEntity {
     private int countDownTime = 120;
     private int removeTime = 30;
-    private boolean allowToPass = true;
+    private boolean allowToPass2 = true;
     private boolean exploded = false;
 
     private ExplosionDirection[] explosions;
@@ -23,12 +22,12 @@ public class Bomb extends AnimatedEntity {
 
     private final int explosionTime = 50;
 
-    public Bomb(int x, int y, Image boom) {
+    public Bomb2(int x, int y, Image boom) {
         super(x, y, boom);
         boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE, Parameter.SCALED_SIZE);
     }
 
-    public Bomb(int x, int y) {
+    public Bomb2(int x, int y) {
         super(x, y, Sprite.bomb);
         boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE, Parameter.SCALED_SIZE);
     }
@@ -68,21 +67,21 @@ public class Bomb extends AnimatedEntity {
     }
 
     private void setAllowToPass() {
-        if (!isColliding(Player.getPlayer())) {
-            allowToPass = false;
+        if (!isColliding(Player2.getPlayer())) {
+            allowToPass2 = false;
         }
     }
 
-    public boolean allowToPass() {
-        return allowToPass;
+    public boolean allowToPass2() {
+        return allowToPass2;
     }
 
     public void setExplosions() {
         explosions = new ExplosionDirection[4];
-        Entity entity = MapCreate.getFixedEntityAt(x_pos, y_pos);
-        if (entity instanceof Brick) {
-            ((Brick) entity).setExploded();
-        }
+//        Entity entity = MapCreate.getFixedEntityAt(x_pos, y_pos);
+//        if (entity instanceof Brick) {
+//            ((Brick) entity).setExploded();
+//        }
         for (int i = 0; i < explosions.length; i++) {
             explosions[i] = new ExplosionDirection(x_pos, y_pos, Director.dir[i], Player.getPlayer().getBombRadius());
             for (int j = 0; j < explosions[i].getExplosions().length; j++) {
@@ -91,3 +90,4 @@ public class Bomb extends AnimatedEntity {
         }
     }
 }
+

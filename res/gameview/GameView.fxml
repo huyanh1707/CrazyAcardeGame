@@ -1,16 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="624.0" prefWidth="1000.0" stylesheets="@gameview.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gameplay.GameViewController">
    <children>
-      <ImageView fitHeight="41.0" fitWidth="143.0" layoutX="847.0" layoutY="563.0" onMouseClicked="#switchToMenu" pickOnBounds="true" smooth="false" styleClass="imageview" />
-      <Label layoutX="888.0" layoutY="570.0" onMouseClicked="#switchToMenu" prefHeight="26.0" prefWidth="62.0" text="Menu">
+      <ImageView layoutX="816.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@roomcase.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="41.0" fitWidth="167.0" layoutX="825.0" layoutY="577.0" onMouseClicked="#switchToMenu" pickOnBounds="true" smooth="false" styleClass="imageview" />
+      <Label layoutX="877.0" layoutY="583.0" onMouseClicked="#switchToMenu" prefHeight="27.0" prefWidth="65.0" text="MENU">
          <font>
             <Font name="Berlin Sans FB" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="878.0" layoutY="512.0" onMouseClicked="#switchToMenu" prefHeight="27.0" prefWidth="65.0" text="PLAYER">
+         <font>
+            <Font name="Berlin Sans FB" size="17.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="78.0" fitWidth="78.0" layoutX="869.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../menu/blue_panel.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="65.0" layoutX="876.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@faceimage/faceblue.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="Level" layoutX="860.0" layoutY="136.0" prefHeight="20.0" prefWidth="100.0" text="Level">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../menu/bg.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Berlin Sans FB" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="Life" layoutX="860.0" layoutY="230.0" prefHeight="20.0" prefWidth="100.0" text="Life">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../menu/bg.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Berlin Sans FB" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="Score" layoutX="860.0" layoutY="184.0" prefHeight="20.0" prefWidth="100.0" text="Score">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../menu/bg.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Berlin Sans FB" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="Enemies" layoutX="860.0" layoutY="338.0" prefHeight="20.0" prefWidth="100.0" text="Enemies">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../menu/bg.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Berlin Sans FB" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="Bomb" layoutX="860.0" layoutY="279.0" prefHeight="20.0" prefWidth="100.0" text="Bomb">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../menu/bg.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Berlin Sans FB" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="860.0" layoutY="394.0" prefHeight="20.0" prefWidth="100.0" text="Power">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../menu/bg.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Berlin Sans FB" size="17.0" />
          </font>
       </Label>
    </children>

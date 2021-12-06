@@ -3,6 +3,8 @@ package gamelogic;
 import constants.Parameter;
 import entities.Entity;
 import entities.Player;
+import entities.bomb.Bomb;
+import gameplay.GameViewController;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import gameplay.MapCreate;
@@ -17,13 +19,11 @@ public class GameLoop {
                         , MapCreate.mapHeight * Parameter.SCALED_SIZE);
                 updateGame();
                 renderGame(graphicsContext);
-                if(MapCreate.pause) {
+                if(MapCreate.pause1) {
+                    Player.getPlayer().resetPlayer();
                     stop();
-
-                    Player.getPlayer().resetBombCount();
-                    Player.getPlayer().resetFlames();
-                    Player.getPlayer().resetSpeed();
                 }
+//                GameViewController.update();
             }
         };
         timer.start();

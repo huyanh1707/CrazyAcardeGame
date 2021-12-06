@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="624.0" prefWidth="1000.0" stylesheets="@gameview.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gameplay.GameViewController">
+<AnchorPane prefHeight="624.0" prefWidth="1000.0" stylesheets="@gameview.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gameplay.MultiPlayerController">
    <children>
-      <ImageView fitHeight="41.0" fitWidth="143.0" layoutX="847.0" layoutY="563.0" onMouseClicked="#switchToMenu" pickOnBounds="true" smooth="false" styleClass="imageview" />
-      <Label layoutX="888.0" layoutY="570.0" onMouseClicked="#switchToMenu" prefHeight="26.0" prefWidth="62.0" text="Menu">
+      <ImageView fitHeight="624.0" fitWidth="184.0" layoutX="816.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@multiroomcase.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="41.0" fitWidth="167.0" layoutX="825.0" layoutY="577.0" onMouseClicked="#switchToMenu" pickOnBounds="true" smooth="false" styleClass="imageview" />
+      <Label layoutX="881.0" layoutY="583.0" onMouseClicked="#switchToMenu" prefHeight="27.0" prefWidth="59.0" text="Menu">
          <font>
             <Font name="Berlin Sans FB" size="24.0" />
          </font>

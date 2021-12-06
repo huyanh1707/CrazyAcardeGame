@@ -1,8 +1,7 @@
 package entities;
 
 import constants.Parameter;
-import entities.bomb.Bomb;
-import entities.bomb.BombExplosion;
+import entities.bomb.Bomb2;
 import entities.enemies.Enemy;
 import gamelogic.KeyInput;
 import gameplay.MapCreate;
@@ -12,9 +11,9 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player extends MovingEntity {
+public class Player2 extends MovingEntity {
 
-    private static Player player = null;
+    private static Player2 player2 = null;
 
     private int bombCount = 1;
     private int bombRadius = 1;
@@ -24,7 +23,7 @@ public class Player extends MovingEntity {
     private int lifeCount = 100;
 
     private boolean ableToPassFlame = false;
-    public boolean ableToPassBomb = false;
+    private boolean ableToPassBomb = false;
     private boolean ableToPlaceBomb = true;
     private static boolean canDie = false;
 
@@ -32,9 +31,9 @@ public class Player extends MovingEntity {
 
     KeyInput input;
 
-    private final List<Bomb> bombList = new ArrayList<>();
+    private final List<Bomb2> bombList = new ArrayList<>();
 
-    public Player(int x, int y, Image player) {
+    public Player2(int x, int y, Image player) {
         super(x, y, player);
         boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE - 10, Parameter.SCALED_SIZE - 2);
         alive = true;
@@ -44,7 +43,7 @@ public class Player extends MovingEntity {
         speed = 2;
     }
 
-    public Player(int x, int y) {
+    public Player2(int x, int y) {
         super(x, y, Sprite.player_right);
         boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE - 10, Parameter.SCALED_SIZE - 2);
         alive = true;
@@ -54,28 +53,27 @@ public class Player extends MovingEntity {
         speed = 2;
     }
 
-    public static Player setPlayer(int x, int y, boolean newOne) {
-        if (player == null || newOne) {
-            player = new Player(x, y);
+    public static Player2 setPlayer(int x, int y, boolean newOne) {
+        if (player2 == null || newOne) {
+            player2 = new Player2(x, y);
         } else {
-            player.setPosition(x, y);
+            player2.setPosition(x, y);
         }
         canDie = false;
-        return player;
+        return player2;
     }
 
-    public static Player getPlayer() {
-        return player;
+    public static Player2 getPlayer() {
+        return player2;
     }
 
     public void update() {
         animation();
         checkEnemyCollision();
-        checkBombCollision();
         recountBombs();
         playAnimation();
         try {
-            input.playerKeyHandler();
+            input.player2KeyHandler();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -133,8 +131,8 @@ public class Player extends MovingEntity {
     public boolean checkFriendlyCollisions(int x, int y) {
         boundedBox.setPosition(x, y);
         for (Entity entity : MapCreate.getTopLayer()) {
-            if (entity instanceof Bomb && isColliding(entity)
-                    && !((Bomb) entity).allowToPass() && !ableToPassBomb) {
+            if (entity instanceof Bomb2 && isColliding(entity)
+                    && !((Bomb2) entity).allowToPass2() && !ableToPassBomb) {
                 boundedBox.setPosition(x_pos, y_pos);
                 return false;
             }
@@ -157,16 +155,9 @@ public class Player extends MovingEntity {
                 break;
             }
         }
-    }
-    public void checkBombCollision() {
         for (Entity entity : MapCreate.getTopLayer()) {
-            if (entity instanceof BombExplosion
-                    && isColliding(entity) && canDie && !ableToPassFlame) {
-                revival();
-                break;
-            }
-            if (entity instanceof Bomb && isColliding(entity)
-                    && ((Bomb) entity).isExploded() && !ableToPassFlame) {
+            if (entity instanceof Bomb2 && isColliding(entity)
+                    && ((Bomb2) entity).isExploded() && !ableToPassFlame) {
                 revival();
                 break;
             }
@@ -197,7 +188,7 @@ public class Player extends MovingEntity {
             }
         }
         if (placedBombs < bombCount && ableToPlaceBomb && alive) {
-            Bomb bomb = new Bomb(x_bomb, y_bomb);
+            Bomb2 bomb = new Bomb2(x_bomb, y_bomb);
             MapCreate.getTopLayer().add(bomb);
             bombList.add(bomb);
             MapCreate.mapMatrix[y_bomb / Parameter.BLOCK_SIZE][x_bomb / Parameter.BLOCK_SIZE] = '*';
@@ -250,14 +241,6 @@ public class Player extends MovingEntity {
         return bombCount;
     }
 
-    public int getRemainBombs() {
-        return bombCount - placedBombs;
-    }
-
-    public int getLifeCount() {
-        return lifeCount;
-    }
-
     public void increaseBombs() {
         bombCount++;
     }
@@ -293,5 +276,4 @@ public class Player extends MovingEntity {
     public Image getLeftImage() {
         return Sprite.player_left;
     }
-
 }
