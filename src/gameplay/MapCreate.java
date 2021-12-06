@@ -7,6 +7,7 @@ import entities.block.Wall;
 import entities.bomb.Bomb;
 import entities.bomb.Bomb2;
 import entities.enemies.*;
+import entities.powerup.Portal;
 import entities.powerup.PowerupBombs;
 import entities.powerup.PowerupFlames;
 import entities.powerup.PowerupSpeed;
@@ -121,6 +122,21 @@ public class MapCreate {
         }
     }
 
+    public static void nextLevel() {
+        if (currentLevel <= 5) {
+            currentLevel += 1;
+        } else {
+            currentLevel = 1;
+        }
+
+        createLevel(currentLevel);
+        player.resetBombList();
+    }
+
+    public static void resetLevel() {
+        currentLevel = 1;
+    }
+
     public static List<Entity> getBoardLayer() {
         return boardLayer;
     }
@@ -176,7 +192,12 @@ public class MapCreate {
                 boardLayer.add(new Grass(x, y));
                 enemyLayer.add(new Kondoria(x, y));
                 break;
-            // Power up
+            // Powerup item
+            case 'x':
+                boardLayer.add(new Grass(x, y));
+                midLayer.add(new Portal(x, y));
+                topLayer.add(new Brick(x, y));
+                break;
             case 'b':
                 boardLayer.add(new Grass(x, y));
                 midLayer.add(new PowerupBombs(x,y));

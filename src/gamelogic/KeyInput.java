@@ -67,7 +67,7 @@ public class KeyInput {
             player2.move(0, Director.DOWN);
         }
 
-        if (keyBoardInputs.contains(KeyCode.TAB)) {
+        if (keyBoardInputs.contains(KeyCode.SHIFT)) {
             player2.placeBomb();
         }
     }

@@ -21,6 +21,7 @@ public class GameLoop {
                 renderGame(graphicsContext);
                 if(MapCreate.pause1) {
                     Player.getPlayer().resetPlayer();
+                    MapCreate.resetLevel();
                     stop();
                 }
 //                GameViewController.update();

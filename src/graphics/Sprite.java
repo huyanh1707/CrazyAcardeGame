@@ -12,6 +12,7 @@ public class Sprite {
     public static Image grass = spriteImages[6][0];
     public static Image brick = spriteImages[7][0];
     public static Image transparent = spriteImages[15][15];
+    public static Image portal = spriteImages[4][0];
 
     public static Image brick_exploded = spriteImages[7][1];
     public static Image brick_exploded_1 = spriteImages[7][2];

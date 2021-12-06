@@ -213,6 +213,10 @@ public class Player2 extends MovingEntity {
         bombList.clear();
     }
 
+    public void resetBombList() {
+        bombList.clear();
+    }
+
     public int getX_node() {
         return x_node;
     }

@@ -258,6 +258,10 @@ public class Player extends MovingEntity {
         return lifeCount;
     }
 
+    public void resetBombList() {
+        bombList.clear();
+    }
+
     public void increaseBombs() {
         bombCount++;
     }
