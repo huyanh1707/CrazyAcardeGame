@@ -3,6 +3,7 @@ package entities.enemies;
 import entities.Entity;
 import entities.MovingEntity;
 import entities.RectangleBox;
+import entities.bomb.BombExplosion;
 import gameplay.MapCreate;
 import javafx.scene.image.Image;
 
@@ -24,6 +25,7 @@ public abstract class Enemy extends MovingEntity {
 
     public void update() {
         this.animation();
+        checkBombCollision();
         if (!this.alive) {
             if (this.passAwayTime > 0) {
                 --this.passAwayTime;
@@ -55,6 +57,15 @@ public abstract class Enemy extends MovingEntity {
         while(!this.isColliding(entity));
         this.boundedBox.setPosition(this.x_pos, this.y_pos);
         return false;
+    }
+
+    public void checkBombCollision() {
+        for (Entity entity : MapCreate.getTopLayer()) {
+            if (entity instanceof BombExplosion && isColliding(entity)) {
+                alive = false;
+                break;
+            }
+        }
     }
 
     protected void enemySmartMoving() {

@@ -1,5 +1,6 @@
 package entities.enemies;
 
+import gamelogic.SoundEffect;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 
@@ -7,6 +8,7 @@ public class Doll extends Enemy {
 
     public Doll(int x, int y, Image doll) {
         super(x, y, doll);
+        score = 500;
         speed = 2;
         movingEnemy = new MovingEnemy(MovingEnemy.IQ.LOW,
                 ableToPassBrick, ableToPassWall);
@@ -14,6 +16,7 @@ public class Doll extends Enemy {
 
     public Doll(int x, int y) {
         super(x, y, Sprite.doll_right);
+        score = 500;
         speed = 2;
         movingEnemy = new MovingEnemy(MovingEnemy.IQ.LOW,
                 ableToPassBrick, ableToPassWall);
@@ -33,6 +36,11 @@ public class Doll extends Enemy {
                             , Sprite.doll_left_1, Sprite.doll_left_2, animate, 20);
                     break;
             }
+        }
+        else {
+            new SoundEffect("/sound/enemyKill.wav").play(false);
+            image = Sprite.playSpriteAnimation(Sprite.mob_dead_1
+                    , Sprite.mob_dead_2, Sprite.mob_dead_3, animate, 30);
         }
     }
 

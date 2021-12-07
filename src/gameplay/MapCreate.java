@@ -18,7 +18,9 @@ import gamelogic.MultiPlayerGameLoop;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,10 +55,20 @@ public class MapCreate {
     private static final List<Entity> midLayer = new ArrayList<>();
     private static final List<Enemy> enemyLayer = new ArrayList<>();
 
+    public static Label score;
+    public static Label life;
+    public static Label immortal;
+    public static Label bombs;
+    public static Label range;
+    public static Label speed;
+    public static Label levels;
+    public static Label enemies;
+
     public static void initGame(Pane root, Scene scene) {
         pause1 = false;
         canvas = new Canvas();
-        root.getChildren().addAll(canvas);
+        initLabel();
+        root.getChildren().addAll(canvas, score, life, immortal, bombs, levels, enemies, range, speed);
         graphicsContext = canvas.getGraphicsContext2D();
         createLevel(currentLevel);
         GameLoop.start(graphicsContext);
@@ -267,5 +279,43 @@ public class MapCreate {
             }
         }
         return null;
+    }
+
+    private static void initLabel() {
+        levels = new Label("Level");
+        score = new Label("Score");
+        life = new Label("Life");
+        bombs = new Label("Bomb");
+        range = new Label("Range");
+        speed = new Label("Speed");
+        enemies = new Label("Enemies");
+        immortal = new Label("Immortal");
+        levels.setFont(new Font("Berlin Sans FB", 17));
+        score.setFont(new Font("Berlin Sans FB", 17));
+        life.setFont(new Font("Berlin Sans FB", 17));
+        bombs.setFont(new Font("Berlin Sans FB", 17));
+        range.setFont(new Font("Berlin Sans FB", 17));
+        speed.setFont(new Font("Berlin Sans FB", 17));
+        enemies.setFont(new Font("Berlin Sans FB", 17));
+        immortal.setFont(new Font("Berlin Sans FB", 17));
+        levels.setLayoutX(885); levels.setLayoutY(130);
+        score.setLayoutX(885); score.setLayoutY(175);
+        life.setLayoutX(885); life.setLayoutY(220);
+        bombs.setLayoutX(885); bombs.setLayoutY(265);
+        range.setLayoutX(885); range.setLayoutY(310);
+        speed.setLayoutX(885); speed.setLayoutY(355);
+        enemies.setLayoutX(885); enemies.setLayoutY(400);
+        immortal.setLayoutX(877); immortal.setLayoutY(455);
+    }
+
+    public static void updateLabel() {
+        levels.setText("Level: " + currentLevel);
+        life.setText("Life: " + Player.getPlayer().getLifeCount());
+        bombs.setText("Bomb: " + Player.getPlayer().getRemainBombs());
+        score.setText("Score: " + gameScore);
+        immortal.setText("Time left: " + Player.getPlayer().getImmortalTime());
+        speed.setText("Speed: " + Player.getPlayer().getSpeed());
+        range.setText("Range: " + Player.getPlayer().getBombRadius());
+        enemies.setText("Left: " + getEnemyLayer().size());
     }
 }

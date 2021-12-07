@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import gamelogic.GameLoop;
 //import gamelogic.MultiPlayerGameLoop;
+import gamelogic.SoundEffect;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,5 +43,7 @@ public class MultiPlayerController implements Initializable {
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
+        SoundEffect.GAMEPLAY.stop();
+        SoundEffect.BACKGROUND.play(true);
     }
 }

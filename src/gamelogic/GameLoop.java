@@ -18,13 +18,13 @@ public class GameLoop {
                         , MapCreate.mapWidth * Parameter.SCALED_SIZE
                         , MapCreate.mapHeight * Parameter.SCALED_SIZE);
                 updateGame();
+                MapCreate.updateLabel();
                 renderGame(graphicsContext);
                 if(MapCreate.pause1) {
                     Player.getPlayer().resetPlayer();
                     MapCreate.resetLevel();
                     stop();
                 }
-//                GameViewController.update();
             }
         };
         timer.start();

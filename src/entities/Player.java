@@ -5,6 +5,7 @@ import entities.bomb.Bomb;
 import entities.bomb.BombExplosion;
 import entities.enemies.Enemy;
 import gamelogic.KeyInput;
+import gamelogic.SoundEffect;
 import gameplay.MapCreate;
 import graphics.Sprite;
 import javafx.scene.image.Image;
@@ -175,6 +176,7 @@ public class Player extends MovingEntity {
 
     private void revival() {
         if (lifeCount > 0) {
+            new SoundEffect("/sound/revival.wav").play(false);
             immortalTime = 100;
             canDie = false;
             alive = true;
@@ -201,6 +203,7 @@ public class Player extends MovingEntity {
             MapCreate.getTopLayer().add(bomb);
             bombList.add(bomb);
             MapCreate.mapMatrix[y_bomb / Parameter.BLOCK_SIZE][x_bomb / Parameter.BLOCK_SIZE] = '*';
+            new SoundEffect("/sound/place_bomb.wav").play(false);
         }
     }
 
@@ -282,6 +285,10 @@ public class Player extends MovingEntity {
         speed ++;
     }
 
+    public int getImmortalTime() {
+        return immortalTime;
+    }
+
     public Image getUpImage() {
         return Sprite.player_up;
     }
@@ -297,5 +304,4 @@ public class Player extends MovingEntity {
     public Image getLeftImage() {
         return Sprite.player_left;
     }
-
 }

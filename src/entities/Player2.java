@@ -4,6 +4,7 @@ import constants.Parameter;
 import entities.bomb.Bomb2;
 import entities.enemies.Enemy;
 import gamelogic.KeyInput;
+import gamelogic.SoundEffect;
 import gameplay.MapCreate;
 import graphics.Sprite;
 import javafx.scene.image.Image;
@@ -192,6 +193,7 @@ public class Player2 extends MovingEntity {
             MapCreate.getTopLayer().add(bomb);
             bombList.add(bomb);
             MapCreate.mapMatrix[y_bomb / Parameter.BLOCK_SIZE][x_bomb / Parameter.BLOCK_SIZE] = '*';
+            new SoundEffect("/sound/place_bomb.wav").play(false);
         }
     }
 

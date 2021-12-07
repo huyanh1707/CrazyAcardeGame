@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 import entities.Player;
+import gamelogic.SoundEffect;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,14 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class GameViewController implements Initializable {
-    @FXML
-    public static Label Life, Level, Score, Bomb, Enemies;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
-
+public class GameViewController {
     public void switchToMenu(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/menu/Menu.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -32,5 +26,7 @@ public class GameViewController implements Initializable {
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
+        SoundEffect.GAMEPLAY.stop();
+        SoundEffect.BACKGROUND.play(true);
     }
 }

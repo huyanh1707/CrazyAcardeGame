@@ -1,3 +1,4 @@
+import gamelogic.SoundEffect;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,10 +17,13 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("menu/Menu.fxml")));
-        Scene scene = new Scene(root, 850, 624);
+        Scene scene = new Scene(root, 838, 612);
+        stage.setResizable(false);
+        stage.setFullScreen(false);
         stage.getIcons().add(new Image("/icon_titlebar.png"));
         stage.setTitle("BOMBERMAN");
         stage.setScene(scene);
         stage.show();
+        SoundEffect.BACKGROUND.play(true);
     }
 }

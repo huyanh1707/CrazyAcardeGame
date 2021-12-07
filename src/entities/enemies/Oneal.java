@@ -1,11 +1,13 @@
 package entities.enemies;
 
+import gamelogic.SoundEffect;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 
 public class Oneal extends Enemy {
     public Oneal(int x, int y, Image oneal) {
         super(x, y, oneal);
+        score = 200;
         speed = 2;
         movingEnemy = new MovingEnemy(MovingEnemy.IQ.MEDIUM,
                 ableToPassBrick, ableToPassWall);
@@ -13,6 +15,7 @@ public class Oneal extends Enemy {
 
     public Oneal(int x, int y) {
         super(x, y, Sprite.oneal_right);
+        score = 200;
         speed = 2;
         movingEnemy = new MovingEnemy(MovingEnemy.IQ.MEDIUM,
                 ableToPassBrick, ableToPassWall);
@@ -33,9 +36,12 @@ public class Oneal extends Enemy {
                     break;
             }
         }
+        else {
+            new SoundEffect("/sound/enemyKill.wav").play(false);
+            image = Sprite.playSpriteAnimation(Sprite.mob_dead_1
+                    , Sprite.mob_dead_2, Sprite.mob_dead_3, animate, 30);
+        }
     }
-
-
 
     public Image getUpImage() {
         return Sprite.oneal_right;

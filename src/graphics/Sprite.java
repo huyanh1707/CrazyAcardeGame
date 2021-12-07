@@ -125,6 +125,10 @@ public class Sprite {
     public static Image powerup_bombpass = spriteImages[5][10];
     public static Image powerup_flamepass = spriteImages[6][10];
 
+    public static Image mob_dead_1 = spriteImages[15][0];
+    public static Image mob_dead_2 = spriteImages[15][1];
+    public static Image mob_dead_3 = spriteImages[15][2];
+
     public static Image playSpriteAnimation(Image image_0, Image image_1, Image image_2, int animate, int time) {
         int temp = animate % time;
         int delta = time / 3;

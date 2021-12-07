@@ -10,14 +10,13 @@ import entities.block.Brick;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 import gameplay.MapCreate;
+import gamelogic.SoundEffect;
 
 public class Bomb extends AnimatedEntity {
     private int countDownTime = 120;
     private int removeTime = 30;
     private boolean allowToPass = true;
     private boolean exploded = false;
-
-    private ExplosionDirection[] explosions;
 
     private BombExplosion explosion;
 
@@ -40,6 +39,7 @@ public class Bomb extends AnimatedEntity {
             if (!exploded) {
                 setExplosions();
                 exploded = true;
+                new SoundEffect("/sound/explosion.wav").play(false);
             }
             if (removeTime > 0) {
                 removeTime--;
@@ -78,7 +78,7 @@ public class Bomb extends AnimatedEntity {
     }
 
     public void setExplosions() {
-        explosions = new ExplosionDirection[4];
+        ExplosionDirection[] explosions = new ExplosionDirection[4];
         Entity entity = MapCreate.getFixedEntityAt(x_pos, y_pos);
         if (entity instanceof Brick) {
             ((Brick) entity).setExploded();

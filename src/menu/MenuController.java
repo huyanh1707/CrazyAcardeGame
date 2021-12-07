@@ -1,5 +1,6 @@
 package menu;
 
+import gamelogic.SoundEffect;
 import gameplay.*;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -38,6 +39,9 @@ public class MenuController implements Initializable {
         gameStage.setScene(scene);
         gameStage.centerOnScreen();
         gameStage.show();
+        SoundEffect.BACKGROUND.stop();
+        SoundEffect.GAMESTART.play(false);
+        SoundEffect.GAMEPLAY.play(true);
     }
 
     @FXML
@@ -49,6 +53,9 @@ public class MenuController implements Initializable {
         gameStage.setScene(scene);
         gameStage.centerOnScreen();
         gameStage.show();
+        SoundEffect.BACKGROUND.stop();
+        SoundEffect.GAMESTART.play(false);
+        SoundEffect.GAMEPLAY.play(true);
     }
 
     @Override

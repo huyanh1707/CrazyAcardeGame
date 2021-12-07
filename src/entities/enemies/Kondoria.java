@@ -1,5 +1,6 @@
 package entities.enemies;
 
+import gamelogic.SoundEffect;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 
@@ -7,6 +8,7 @@ public class Kondoria extends Enemy {
 
     public Kondoria(int x, int y, Image kondoria) {
         super(x, y, kondoria);
+        score = 1000;
         ableToPassBrick = true;
         speed = 2;
         movingEnemy = new MovingEnemy(MovingEnemy.IQ.MEDIUM,
@@ -15,6 +17,7 @@ public class Kondoria extends Enemy {
 
     public Kondoria(int x, int y) {
         super(x, y, Sprite.kondoria_right);
+        score = 1000;
         ableToPassBrick = true;
         speed = 2;
         movingEnemy = new MovingEnemy(MovingEnemy.IQ.MEDIUM,
@@ -36,6 +39,11 @@ public class Kondoria extends Enemy {
                             , Sprite.kondoria_left_1, Sprite.kondoria_left_2, animate, 60);
                     break;
             }
+        }
+        else {
+            new SoundEffect("/sound/enemyKill.wav").play(false);
+            image = Sprite.playSpriteAnimation(Sprite.mob_dead_1
+                    , Sprite.mob_dead_2, Sprite.mob_dead_3, animate, 30);
         }
     }
 

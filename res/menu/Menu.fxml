@@ -10,9 +10,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="624.0" prefWidth="851.0" stylesheets="@button.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.MenuController">
+<AnchorPane prefHeight="624.0" prefWidth="850.0" stylesheets="@button.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.MenuController">
    <children>
-      <ImageView fitHeight="624.0" fitWidth="851.0" pickOnBounds="true">
+      <ImageView fitHeight="624.0" fitWidth="850.0" pickOnBounds="true">
          <image>
             <Image url="@bg.png" />
          </image>
