@@ -1,9 +1,9 @@
 package gamelogic;
 
-import constants.Parameter;
+import graphics.Parameter;
 import entities.Entity;
-import entities.Player;
-import entities.Player2;
+import entities.player.Player;
+import entities.player.Player2;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import gameplay.MapCreate;

@@ -41,7 +41,7 @@ public class Kondoria extends Enemy {
             }
         }
         else {
-            new SoundEffect("/sound/enemyKill.wav").play(false);
+            SoundEffect.ENEMY_KILL.play(false);
             image = Sprite.playSpriteAnimation(Sprite.mob_dead_1
                     , Sprite.mob_dead_2, Sprite.mob_dead_3, animate, 30);
         }

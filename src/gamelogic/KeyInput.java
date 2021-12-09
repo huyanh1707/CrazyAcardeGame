@@ -1,8 +1,7 @@
 package gamelogic;
 
-import constants.Director;
-import entities.Player;
-import entities.Player2;
+import entities.player.Player;
+import entities.player.Player2;
 import javafx.scene.input.KeyCode;
 
 import java.util.List;

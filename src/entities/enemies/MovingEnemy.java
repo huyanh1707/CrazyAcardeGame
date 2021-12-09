@@ -1,16 +1,16 @@
 package entities.enemies;
 
-import constants.Director;
-import entities.Player;
+import gamelogic.Director;
+import entities.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MovingEnemy {
-    private MovingEnemy.IQ iq;
-    private boolean wallPass;
-    private boolean brickPass;
-    private Player player;
+    private final MovingEnemy.IQ iq;
+    private final boolean wallPass;
+    private final boolean brickPass;
+    private final Player player;
 
     public MovingEnemy(MovingEnemy.IQ iq, boolean brickPass, boolean wallPass) {
         this.iq = iq;
@@ -19,9 +19,9 @@ public class MovingEnemy {
         this.player = Player.getPlayer();
     }
 
-    class Node {
-        private int x;
-        private int y;
+    static class Node {
+        private final int x;
+        private final int y;
 
         Node(int x, int y) {
             this.x = x;
@@ -53,7 +53,7 @@ public class MovingEnemy {
         }
 
         if (this.validNode(matrix, node.x, node.y + 1)) {
-            neighbors.add(new MovingEnemy.Node(node.x, node.y + 1));
+            neighbors.add(new Node(node.x, node.y + 1));
         }
 
         return neighbors;
@@ -100,10 +100,10 @@ public class MovingEnemy {
         boolean pathExits = false;
         if (Math.abs((e_x - p_x) * (e_y - p_y)) < tracingRange && iq != MovingEnemy.IQ.LOW) {
             List<MovingEnemy.Node> queue = new ArrayList();
-            queue.add(new MovingEnemy.Node(p_x, p_y));
+            queue.add(new Node(p_x, p_y));
 
             while(!queue.isEmpty()) {
-                MovingEnemy.Node lastNode = (MovingEnemy.Node)queue.remove(0);
+                MovingEnemy.Node lastNode = queue.remove(0);
                 if (lastNode.x - 1 == e_x && lastNode.y == e_y) {
                     direction = Director.RIGHT;
                     pathExits = true;
@@ -131,8 +131,8 @@ public class MovingEnemy {
                 try {
                     checkingMap[lastNode.y][lastNode.x] = '0';
                 } catch (ArrayIndexOutOfBoundsException var14) {
+                    var14.printStackTrace();
                 }
-
                 List<MovingEnemy.Node> neighbors = this.getNeighborNodes(checkingMap, lastNode);
                 queue.addAll(neighbors);
             }
@@ -170,12 +170,12 @@ public class MovingEnemy {
         return direction;
     }
 
-    public static enum IQ {
+    public enum IQ {
         LOW,
         MEDIUM,
         HIGH;
 
-        private IQ() {
+        IQ() {
         }
     }
 }

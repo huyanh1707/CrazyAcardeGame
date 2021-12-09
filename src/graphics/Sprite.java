@@ -1,6 +1,5 @@
 package graphics;
 
-import constants.Parameter;
 import javafx.scene.image.Image;
 
 public class Sprite {

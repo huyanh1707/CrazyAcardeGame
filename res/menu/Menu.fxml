@@ -126,5 +126,15 @@
             <Image url="@title.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="unmute" fitHeight="82.0" fitWidth="63.0" layoutX="100.0" layoutY="30.0" onMouseClicked="#PauseSound" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@unmute.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mute" fitHeight="82.0" fitWidth="63.0" layoutX="100.0" layoutY="30.0" onMouseClicked="#PlaySound" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@mute.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

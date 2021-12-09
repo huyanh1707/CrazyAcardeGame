@@ -7,13 +7,18 @@ import java.net.URL;
 public class SoundEffect {
     public static SoundEffect BACKGROUND = new SoundEffect("/sound/mainScene.wav");
     public static SoundEffect GAMEPLAY = new SoundEffect("/sound/roomScene.wav");
-    public static SoundEffect GAMESTART = new SoundEffect("/sound/gameStart.wav");
+    public static SoundEffect GAME_START = new SoundEffect("/sound/gameStart.wav");
+    public static SoundEffect REVIVAL = new SoundEffect("/sound/revival.wav");
+    public static SoundEffect EAT_PROPS = new SoundEffect("/sound/eatProp.wav");
+    public static SoundEffect PLACE_BOMB = new SoundEffect("/sound/place_bomb.wav");
+    public static SoundEffect EXPLOSION = new SoundEffect("/sound/explosion.wav");
+    public static SoundEffect ENEMY_KILL = new SoundEffect("/sound/enemyKill.wav");
 
-    public static enum Volume {
-        MUTE, LOW, MEDIUM, HIGH
+    public enum Volume {
+        MUTE, UNMUTE
     }
 
-    public static Volume volume = Volume.LOW;
+    public static Volume volume = Volume.UNMUTE;
 
     private Clip clip;
 
@@ -39,18 +44,21 @@ public class SoundEffect {
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
             }
         }
+        else {
+            clip.stop();
+        }
+    }
+
+    public static void mute() {
+        volume = Volume.MUTE;
+    }
+
+    public static void unmute() {
+        volume = Volume.UNMUTE;
     }
 
     public void stop() {
         clip.stop();
         clip.setFramePosition(0);
-    }
-
-    public void mute() {
-        volume = Volume.MUTE;
-    }
-
-    public boolean isPlaying() {
-        return clip.isRunning();
     }
 }

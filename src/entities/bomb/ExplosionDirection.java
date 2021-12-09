@@ -1,7 +1,7 @@
 package entities.bomb;
 
-import constants.Parameter;
-import constants.Director;
+import graphics.Parameter;
+import gamelogic.Director;
 import entities.Entity;
 import entities.block.Brick;
 import entities.block.Wall;

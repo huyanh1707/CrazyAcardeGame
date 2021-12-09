@@ -1,10 +1,10 @@
 package entities.bomb;
 
-import constants.Director;
-import constants.Parameter;
+import gamelogic.Director;
+import graphics.Parameter;
 import entities.AnimatedEntity;
-import entities.Player;
-import entities.Player2;
+import entities.player.Player;
+import entities.player.Player2;
 import entities.RectangleBox;
 import gameplay.MapCreate;
 import graphics.Sprite;

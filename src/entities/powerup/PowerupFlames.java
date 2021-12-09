@@ -1,7 +1,7 @@
 package entities.powerup;
 
-import constants.Parameter;
-import entities.Player;
+import graphics.Parameter;
+import entities.player.Player;
 import gamelogic.SoundEffect;
 import graphics.Sprite;
 
@@ -16,7 +16,7 @@ public class PowerupFlames extends Powerup {
         if (isColliding(Player.getPlayer())) {
             Player.getPlayer().increaseFlames();
             MapCreate.mapMatrix[y_pos / Parameter.BLOCK_SIZE][x_pos / Parameter.BLOCK_SIZE] = ' ';
-            new SoundEffect("/sound/eatProp.wav").play(false);
+            SoundEffect.EAT_PROPS.play(false);
             remove();
         }
     }

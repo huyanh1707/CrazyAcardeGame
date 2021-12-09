@@ -1,6 +1,6 @@
 package entities.powerup;
 
-import constants.Parameter;
+import graphics.Parameter;
 import entities.Entity;
 import entities.RectangleBox;
 import javafx.scene.image.Image;

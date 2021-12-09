@@ -1,4 +1,4 @@
-package constants;
+package graphics;
 
 public class Parameter {
     public static final int SCALE_RATIO = 3;

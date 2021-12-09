@@ -1,6 +1,6 @@
 package entities.block;
 
-import constants.Parameter;
+import graphics.Parameter;
 import entities.AnimatedEntity;
 import entities.RectangleBox;
 import graphics.Sprite;

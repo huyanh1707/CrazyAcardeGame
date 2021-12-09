@@ -1,7 +1,7 @@
 package entities.powerup;
 
-import constants.Parameter;
-import entities.Player;
+import graphics.Parameter;
+import entities.player.Player;
 import gamelogic.SoundEffect;
 import graphics.Sprite;
 import gameplay.MapCreate;
@@ -15,7 +15,7 @@ public class PowerupSpeed extends Powerup {
         if (isColliding(Player.getPlayer())) {
             Player.getPlayer().increaseSpeed();
             MapCreate.mapMatrix[y_pos / Parameter.BLOCK_SIZE][x_pos / Parameter.BLOCK_SIZE] = ' ';
-            new SoundEffect("/sound/eatProp.wav").play(false);
+            SoundEffect.EAT_PROPS.play(false);
             remove();
         }
     }

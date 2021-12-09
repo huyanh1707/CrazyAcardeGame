@@ -1,6 +1,9 @@
-package entities;
+package entities.player;
 
-import constants.Parameter;
+import entities.Entity;
+import entities.MovingEntity;
+import entities.RectangleBox;
+import graphics.Parameter;
 import entities.bomb.Bomb;
 import entities.bomb.BombExplosion;
 import entities.enemies.Enemy;
@@ -22,7 +25,7 @@ public class Player extends MovingEntity {
     private int speed = 2;
     private int placedBombs;
     private int immortalTime = 100;
-    private int lifeCount = 100;
+    private int lifeCount = 10;
 
     private boolean ableToPassFlame = false;
     public boolean ableToPassBomb = false;
@@ -176,13 +179,16 @@ public class Player extends MovingEntity {
 
     private void revival() {
         if (lifeCount > 0) {
-            new SoundEffect("/sound/revival.wav").play(false);
+            SoundEffect.REVIVAL.play(false);
             immortalTime = 100;
             canDie = false;
             alive = true;
             lifeCount--;
             setPosition(x_init, y_init);
+            setImage(Sprite.player_right);
         } else {
+            SoundEffect.GAMEPLAY.stop();
+            MapCreate.LoseEffect();
             alive = false;
             remove();
         }
@@ -203,7 +209,7 @@ public class Player extends MovingEntity {
             MapCreate.getTopLayer().add(bomb);
             bombList.add(bomb);
             MapCreate.mapMatrix[y_bomb / Parameter.BLOCK_SIZE][x_bomb / Parameter.BLOCK_SIZE] = '*';
-            new SoundEffect("/sound/place_bomb.wav").play(false);
+            SoundEffect.PLACE_BOMB.play(false);
         }
     }
 
@@ -218,10 +224,13 @@ public class Player extends MovingEntity {
     }
 
     public void resetPlayer() {
+        setImage(Sprite.player_right);
+        alive = true;
         resetPlaceAble();
         resetBombCount();
         resetFlames();
         resetSpeed();
+        resetLife();
         bombList.clear();
     }
 
@@ -249,16 +258,16 @@ public class Player extends MovingEntity {
         ableToPlaceBomb = true;
     }
 
-    public int getBombCount() {
-        return bombCount;
-    }
-
     public int getRemainBombs() {
         return bombCount - placedBombs;
     }
 
     public int getLifeCount() {
         return lifeCount;
+    }
+
+    public void setLifeCount() {
+        ++lifeCount;
     }
 
     public void resetBombList() {
@@ -272,6 +281,8 @@ public class Player extends MovingEntity {
     public void resetBombCount() {
         bombCount = 1;
     }
+
+    public void resetLife() { lifeCount = 1;}
 
     public int getSpeed() {
         return speed;

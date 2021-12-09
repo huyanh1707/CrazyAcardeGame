@@ -1,7 +1,7 @@
 package entities;
 
-import constants.Parameter;
-import constants.Director;
+import graphics.Parameter;
+import gamelogic.Director;
 import entities.block.Brick;
 import entities.block.Wall;
 import javafx.scene.image.Image;

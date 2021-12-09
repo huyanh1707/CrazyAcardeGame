@@ -1,10 +1,10 @@
 package entities.bomb;
 
-import constants.Director;
-import constants.Parameter;
+import gamelogic.Director;
+import graphics.Parameter;
 import entities.AnimatedEntity;
 import entities.Entity;
-import entities.Player;
+import entities.player.Player;
 import entities.RectangleBox;
 import entities.block.Brick;
 import graphics.Sprite;
@@ -17,10 +17,6 @@ public class Bomb extends AnimatedEntity {
     private int removeTime = 30;
     private boolean allowToPass = true;
     private boolean exploded = false;
-
-    private BombExplosion explosion;
-
-    private final int explosionTime = 50;
 
     public Bomb(int x, int y, Image boom) {
         super(x, y, boom);
@@ -39,10 +35,13 @@ public class Bomb extends AnimatedEntity {
             if (!exploded) {
                 setExplosions();
                 exploded = true;
-                new SoundEffect("/sound/explosion.wav").play(false);
+                SoundEffect.EXPLOSION.play(false);
             }
             if (removeTime > 0) {
                 removeTime--;
+                if(x_pos == Player.getPlayer().getX_pos() && y_pos == Player.getPlayer().getY_pos()) {
+                    Player.getPlayer().setLifeCount();
+                }
             } else {
                 MapCreate.mapMatrix[y_node][x_node] = ' ';
                 remove();

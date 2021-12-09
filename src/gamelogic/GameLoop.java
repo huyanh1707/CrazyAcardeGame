@@ -1,10 +1,8 @@
 package gamelogic;
 
-import constants.Parameter;
+import graphics.Parameter;
 import entities.Entity;
-import entities.Player;
-import entities.bomb.Bomb;
-import gameplay.GameViewController;
+import entities.player.Player;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import gameplay.MapCreate;

@@ -1,6 +1,6 @@
 package entities;
 
-import constants.Parameter;
+import graphics.Parameter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -32,6 +32,10 @@ public abstract class Entity {
 
     public void remove() {
         removed = true;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public boolean isRemoved() {

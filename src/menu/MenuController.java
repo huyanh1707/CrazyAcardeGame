@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -31,6 +32,23 @@ public class MenuController implements Initializable {
     private RadioButton blue, red, green;
 
     @FXML
+    private ImageView mute, unmute;
+
+    @FXML
+    public void PlaySound(MouseEvent event) {
+        unmute.setVisible(true);
+        mute.setVisible(false);
+        SoundEffect.BACKGROUND.play(true);
+    }
+
+    @FXML
+    public void PauseSound(MouseEvent event) {
+        unmute.setVisible(false);
+        mute.setVisible(true);
+        SoundEffect.BACKGROUND.stop();
+    }
+
+    @FXML
     public void PlayGame(MouseEvent event) throws Exception {
         Stage gameStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Pane appRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gameview/GameView.fxml")));
@@ -40,7 +58,7 @@ public class MenuController implements Initializable {
         gameStage.centerOnScreen();
         gameStage.show();
         SoundEffect.BACKGROUND.stop();
-        SoundEffect.GAMESTART.play(false);
+        SoundEffect.GAME_START.play(false);
         SoundEffect.GAMEPLAY.play(true);
     }
 
@@ -54,7 +72,7 @@ public class MenuController implements Initializable {
         gameStage.centerOnScreen();
         gameStage.show();
         SoundEffect.BACKGROUND.stop();
-        SoundEffect.GAMESTART.play(false);
+        SoundEffect.GAME_START.play(false);
         SoundEffect.GAMEPLAY.play(true);
     }
 

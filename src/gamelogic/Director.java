@@ -1,4 +1,4 @@
-package constants;
+package gamelogic;
 
 public enum Director {
     UP, DOWN, LEFT, RIGHT;

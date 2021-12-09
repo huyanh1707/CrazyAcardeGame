@@ -1,6 +1,9 @@
-package entities;
+package entities.player;
 
-import constants.Parameter;
+import entities.Entity;
+import entities.MovingEntity;
+import entities.RectangleBox;
+import graphics.Parameter;
 import entities.bomb.Bomb2;
 import entities.enemies.Enemy;
 import gamelogic.KeyInput;
@@ -193,7 +196,7 @@ public class Player2 extends MovingEntity {
             MapCreate.getTopLayer().add(bomb);
             bombList.add(bomb);
             MapCreate.mapMatrix[y_bomb / Parameter.BLOCK_SIZE][x_bomb / Parameter.BLOCK_SIZE] = '*';
-            new SoundEffect("/sound/place_bomb.wav").play(false);
+            SoundEffect.PLACE_BOMB.play(false);
         }
     }
 

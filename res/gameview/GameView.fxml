@@ -14,16 +14,6 @@
          </image>
       </ImageView>
       <ImageView fitHeight="41.0" fitWidth="167.0" layoutX="825.0" layoutY="577.0" onMouseClicked="#switchToMenu" pickOnBounds="true" smooth="false" styleClass="imageview" />
-      <Label layoutX="877.0" layoutY="583.0" onMouseClicked="#switchToMenu" prefHeight="27.0" prefWidth="65.0" text="MENU">
-         <font>
-            <Font name="Berlin Sans FB" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="878.0" layoutY="512.0" onMouseClicked="#switchToMenu" prefHeight="27.0" prefWidth="65.0" text="PLAYER">
-         <font>
-            <Font name="Berlin Sans FB" size="17.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="78.0" fitWidth="78.0" layoutX="869.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../menu/blue_panel.png" />
@@ -59,6 +49,26 @@
             <Image url="@item/item_050.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="855.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@item/faceblue.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="855.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@item/enemy.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="878.0" layoutY="512.0" onMouseClicked="#switchToMenu" prefHeight="27.0" prefWidth="65.0" text="PLAYER">
+         <font>
+            <Font name="Berlin Sans FB" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="877.0" layoutY="583.0" onMouseClicked="#switchToMenu" prefHeight="27.0" prefWidth="65.0" text="MENU">
+         <font>
+            <Font name="Berlin Sans FB" size="24.0" />
+         </font>
+      </Label>
       <Label layoutX="885.0" layoutY="130.0" prefHeight="20.0" prefWidth="40.0" text="Level">
          <font>
             <Font name="Berlin Sans FB" size="17.0" />
@@ -84,34 +94,24 @@
             <Font name="Berlin Sans FB" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="885.0" layoutY="435.0" prefHeight="20.0" prefWidth="75.0" text="Immortal">
-         <font>
-            <Font name="Berlin Sans FB" size="17.0" />
-         </font>
-      </Label>
       <Label layoutX="885.0" layoutY="355.0" prefHeight="20.0" prefWidth="49.0" text="Speed">
          <font>
             <Font name="Berlin Sans FB" size="17.0" />
          </font>
       </Label>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="850.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@item/faceBW.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="855.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@item/faceblue.png" />
-         </image>
-      </ImageView>
       <Label layoutX="885.0" layoutY="400.0" prefHeight="20.0" prefWidth="32.0" text="Left">
          <font>
             <Font name="Berlin Sans FB" size="17.0" />
          </font>
       </Label>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="855.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="unmute" fitHeight="80.0" fitWidth="60.0" layoutX="880.0" layoutY="430.0" onMouseClicked="#PauseSound" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@item/enemy.png" />
+            <Image url="@../menu/unmute.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mute" fitHeight="80.0" fitWidth="60.0" layoutX="880.0" layoutY="430.0" onMouseClicked="#PlaySound" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../menu/mute.png" />
          </image>
       </ImageView>
    </children>

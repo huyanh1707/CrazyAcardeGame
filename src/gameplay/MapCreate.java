@@ -1,12 +1,11 @@
 package gameplay;
 
-import constants.Parameter;
 import entities.block.Brick;
 import entities.block.Grass;
 import entities.block.Wall;
-import entities.bomb.Bomb;
-import entities.bomb.Bomb2;
 import entities.enemies.*;
+import entities.player.Player;
+import entities.player.Player2;
 import entities.powerup.Portal;
 import entities.powerup.PowerupBombs;
 import entities.powerup.PowerupFlames;
@@ -15,10 +14,13 @@ import gamelogic.KeyController;
 import gamelogic.GameLoop;
 import entities.*;
 import gamelogic.MultiPlayerGameLoop;
+import graphics.Parameter;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
@@ -33,7 +35,7 @@ import java.util.StringTokenizer;
 
 public class MapCreate {
     static Canvas canvas;
-    static GraphicsContext graphicsContext;
+    public static GraphicsContext graphicsContext;
     static Player player;
     static Player2 player2;
 
@@ -57,18 +59,19 @@ public class MapCreate {
 
     public static Label score;
     public static Label life;
-    public static Label immortal;
     public static Label bombs;
     public static Label range;
     public static Label speed;
     public static Label levels;
     public static Label enemies;
+    public static ImageView loseImage;
 
     public static void initGame(Pane root, Scene scene) {
         pause1 = false;
         canvas = new Canvas();
         initLabel();
-        root.getChildren().addAll(canvas, score, life, immortal, bombs, levels, enemies, range, speed);
+        loseImage = new ImageView();
+        root.getChildren().addAll(canvas, score, life, bombs, levels, enemies, range, speed, loseImage);
         graphicsContext = canvas.getGraphicsContext2D();
         createLevel(currentLevel);
         GameLoop.start(graphicsContext);
@@ -289,7 +292,6 @@ public class MapCreate {
         range = new Label("Range");
         speed = new Label("Speed");
         enemies = new Label("Enemies");
-        immortal = new Label("Immortal");
         levels.setFont(new Font("Berlin Sans FB", 17));
         score.setFont(new Font("Berlin Sans FB", 17));
         life.setFont(new Font("Berlin Sans FB", 17));
@@ -297,7 +299,6 @@ public class MapCreate {
         range.setFont(new Font("Berlin Sans FB", 17));
         speed.setFont(new Font("Berlin Sans FB", 17));
         enemies.setFont(new Font("Berlin Sans FB", 17));
-        immortal.setFont(new Font("Berlin Sans FB", 17));
         levels.setLayoutX(885); levels.setLayoutY(130);
         score.setLayoutX(885); score.setLayoutY(175);
         life.setLayoutX(885); life.setLayoutY(220);
@@ -305,7 +306,6 @@ public class MapCreate {
         range.setLayoutX(885); range.setLayoutY(310);
         speed.setLayoutX(885); speed.setLayoutY(355);
         enemies.setLayoutX(885); enemies.setLayoutY(400);
-        immortal.setLayoutX(877); immortal.setLayoutY(455);
     }
 
     public static void updateLabel() {
@@ -313,9 +313,16 @@ public class MapCreate {
         life.setText("Life: " + Player.getPlayer().getLifeCount());
         bombs.setText("Bomb: " + Player.getPlayer().getRemainBombs());
         score.setText("Score: " + gameScore);
-        immortal.setText("Time left: " + Player.getPlayer().getImmortalTime());
         speed.setText("Speed: " + Player.getPlayer().getSpeed());
         range.setText("Range: " + Player.getPlayer().getBombRadius());
         enemies.setText("Left: " + getEnemyLayer().size());
+    }
+
+    public static void LoseEffect() {
+//        MapCreate.pause1 = true;
+        Image image = new Image("/gameview/lose.png");
+        MapCreate.loseImage.setImage(image);
+        loseImage.setLayoutX(300);
+        loseImage.setLayoutY(280);
     }
 }

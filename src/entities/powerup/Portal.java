@@ -1,9 +1,7 @@
 package entities.powerup;
 
-import constants.Parameter;
-import entities.Entity;
-import entities.Player;
-import entities.RectangleBox;
+import entities.player.Player;
+import gamelogic.SoundEffect;
 import gameplay.MapCreate;
 import graphics.Sprite;
 import javafx.scene.image.Image;
@@ -18,6 +16,7 @@ public class Portal extends Powerup {
 
     public void checkPlayerCollision() {
         if (isColliding(Player.getPlayer()) && MapCreate.getEnemyLayer().size() == 0) {
+            SoundEffect.GAME_START.play(false);
             MapCreate.nextLevel();
         }
     }
