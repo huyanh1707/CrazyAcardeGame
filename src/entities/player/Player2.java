@@ -3,7 +3,6 @@ package entities.player;
 import entities.Entity;
 import entities.MovingEntity;
 import entities.RectangleBox;
-import graphics.Parameter;
 import entities.bomb.Bomb2;
 import entities.enemies.Enemy;
 import gamelogic.KeyInput;
@@ -39,7 +38,7 @@ public class Player2 extends MovingEntity {
 
     public Player2(int x, int y, Image player) {
         super(x, y, player);
-        boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE - 10, Parameter.SCALED_SIZE - 2);
+        boundedBox = new RectangleBox(x, y, Sprite.SCALED_SIZE - 10, Sprite.SCALED_SIZE - 2);
         alive = true;
         input = new KeyInput();
         x_init = x;
@@ -49,7 +48,7 @@ public class Player2 extends MovingEntity {
 
     public Player2(int x, int y) {
         super(x, y, Sprite.player_right);
-        boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE - 10, Parameter.SCALED_SIZE - 2);
+        boundedBox = new RectangleBox(x, y, Sprite.SCALED_SIZE - 10, Sprite.SCALED_SIZE - 2);
         alive = true;
         input = new KeyInput();
         x_init = x;
@@ -87,8 +86,8 @@ public class Player2 extends MovingEntity {
         } else {
             canDie = true;
         }
-        x_node = x_pos / Parameter.BLOCK_SIZE;
-        y_node = y_pos / Parameter.BLOCK_SIZE;
+        x_node = x_pos / Sprite.BLOCK_SIZE;
+        y_node = y_pos / Sprite.BLOCK_SIZE;
     }
 
     public void playAnimation() {
@@ -141,11 +140,11 @@ public class Player2 extends MovingEntity {
                 return false;
             }
         }
-        if (x < Parameter.BLOCK_SIZE || x > MapCreate.CANVAS_WIDTH - Parameter.BLOCK_SIZE) {
+        if (x < Sprite.BLOCK_SIZE || x > MapCreate.CANVAS_WIDTH - Sprite.BLOCK_SIZE) {
             boundedBox.setPosition(x_pos, y_pos);
             return false;
         }
-        if (y < Parameter.BLOCK_SIZE || y > MapCreate.CANVAS_HEIGHT - Parameter.BLOCK_SIZE) {
+        if (y < Sprite.BLOCK_SIZE || y > MapCreate.CANVAS_HEIGHT - Sprite.BLOCK_SIZE) {
             boundedBox.setPosition(x_pos, y_pos);
             return false;
         }
@@ -183,8 +182,8 @@ public class Player2 extends MovingEntity {
 
     public void placeBomb() {
         ableToPlaceBomb = true;
-        int x_bomb = ((x_pos + Parameter.SCALED_SIZE / 2) / Parameter.SCALED_SIZE) * Parameter.SCALED_SIZE;
-        int y_bomb = ((y_pos + Parameter.SCALED_SIZE / 2) / Parameter.SCALED_SIZE) * Parameter.SCALED_SIZE;
+        int x_bomb = ((x_pos + Sprite.SCALED_SIZE / 2) / Sprite.SCALED_SIZE) * Sprite.SCALED_SIZE;
+        int y_bomb = ((y_pos + Sprite.SCALED_SIZE / 2) / Sprite.SCALED_SIZE) * Sprite.SCALED_SIZE;
         for (Entity bomb : bombList) {
             if (bomb.getX_pos() == x_bomb && bomb.getY_pos() == y_bomb) {
                 ableToPlaceBomb = false;
@@ -195,7 +194,7 @@ public class Player2 extends MovingEntity {
             Bomb2 bomb = new Bomb2(x_bomb, y_bomb);
             MapCreate.getTopLayer().add(bomb);
             bombList.add(bomb);
-            MapCreate.mapMatrix[y_bomb / Parameter.BLOCK_SIZE][x_bomb / Parameter.BLOCK_SIZE] = '*';
+            MapCreate.mapMatrix[y_bomb / Sprite.BLOCK_SIZE][x_bomb / Sprite.BLOCK_SIZE] = '*';
             SoundEffect.PLACE_BOMB.play(false);
         }
     }

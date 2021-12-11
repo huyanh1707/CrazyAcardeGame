@@ -1,11 +1,11 @@
 package entities.bomb;
 
-import graphics.Parameter;
 import gamelogic.Director;
 import entities.Entity;
 import entities.block.Brick;
 import entities.block.Wall;
 import gameplay.MapCreate;
+import graphics.Sprite;
 
 public class ExplosionDirection {
 
@@ -33,16 +33,16 @@ public class ExplosionDirection {
         while (r < radius) {
             switch (dir) {
                 case UP:
-                    y -= Parameter.SCALED_SIZE;
+                    y -= Sprite.SCALED_SIZE;
                     break;
                 case DOWN:
-                    y += Parameter.SCALED_SIZE;
+                    y += Sprite.SCALED_SIZE;
                     break;
                 case LEFT:
-                    x -= Parameter.SCALED_SIZE;
+                    x -= Sprite.SCALED_SIZE;
                     break;
                 case RIGHT:
-                    x += Parameter.SCALED_SIZE;
+                    x += Sprite.SCALED_SIZE;
                     break;
             }
             Entity entity = MapCreate.getFixedEntityAt(x, y);
@@ -68,16 +68,16 @@ public class ExplosionDirection {
 
             switch (dir) {
                 case UP:
-                    y -= Parameter.SCALED_SIZE;
+                    y -= Sprite.SCALED_SIZE;
                     break;
                 case DOWN:
-                    y += Parameter.SCALED_SIZE;
+                    y += Sprite.SCALED_SIZE;
                     break;
                 case LEFT:
-                    x -= Parameter.SCALED_SIZE;
+                    x -= Sprite.SCALED_SIZE;
                     break;
                 case RIGHT:
-                    x += Parameter.SCALED_SIZE;
+                    x += Sprite.SCALED_SIZE;
                     break;
             }
 

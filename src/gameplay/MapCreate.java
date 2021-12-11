@@ -14,7 +14,7 @@ import gamelogic.KeyController;
 import gamelogic.GameLoop;
 import entities.*;
 import gamelogic.MultiPlayerGameLoop;
-import graphics.Parameter;
+import graphics.Sprite;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -94,7 +94,7 @@ public class MapCreate {
         for (int i = 0; i < mapHeight; i++) {
             for (int j = 0; j < mapWidth; j++) {
                 char c = myMap[i][j];
-                addEntity(c, j * Parameter.SCALED_SIZE, i * Parameter.SCALED_SIZE);
+                addEntity(c, j * Sprite.SCALED_SIZE, i * Sprite.SCALED_SIZE);
             }
         }
         canvas.setHeight(CANVAS_HEIGHT);
@@ -107,7 +107,7 @@ public class MapCreate {
         for (int i = 0; i < mapHeight; i++) {
             for (int j = 0; j < mapWidth; j++) {
                 char c = myMap[i][j];
-                addEntity(c, j * Parameter.SCALED_SIZE, i * Parameter.SCALED_SIZE);
+                addEntity(c, j * Sprite.SCALED_SIZE, i * Sprite.SCALED_SIZE);
             }
         }
         canvas.setHeight(CANVAS_HEIGHT);
@@ -240,8 +240,8 @@ public class MapCreate {
             mapLevel = Integer.parseInt(tokens.nextToken());
             mapHeight = Integer.parseInt(tokens.nextToken());
             mapWidth = Integer.parseInt(tokens.nextToken());
-            CANVAS_HEIGHT = mapHeight * Parameter.BLOCK_SIZE;
-            CANVAS_WIDTH = mapWidth * Parameter.BLOCK_SIZE;
+            CANVAS_HEIGHT = mapHeight * Sprite.BLOCK_SIZE;
+            CANVAS_WIDTH = mapWidth * Sprite.BLOCK_SIZE;
             myMap = new char[mapHeight][mapWidth];
             mapMatrix = new char[mapHeight][mapWidth];
             for (int i = 0; i < mapHeight; i++) {

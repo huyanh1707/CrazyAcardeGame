@@ -1,9 +1,8 @@
 package entities.block;
 
-import graphics.Parameter;
+import graphics.Sprite;
 import entities.AnimatedEntity;
 import entities.RectangleBox;
-import graphics.Sprite;
 import javafx.scene.image.Image;
 import gameplay.MapCreate;
 
@@ -15,12 +14,12 @@ public class Brick extends AnimatedEntity {
 
     public Brick(int x, int y, Image brick) {
         super(x, y, brick);
-        boundedBox = new RectangleBox(x, y, Parameter.BLOCK_SIZE, Parameter.BLOCK_SIZE);
+        boundedBox = new RectangleBox(x, y, Sprite.BLOCK_SIZE, Sprite.BLOCK_SIZE);
     }
 
     public Brick(int x, int y) {
         super(x, y, Sprite.brick);
-        boundedBox = new RectangleBox(x, y, Parameter.BLOCK_SIZE, Parameter.BLOCK_SIZE);
+        boundedBox = new RectangleBox(x, y, Sprite.BLOCK_SIZE, Sprite.BLOCK_SIZE);
     }
 
     public void playAnimation() {
@@ -38,8 +37,8 @@ public class Brick extends AnimatedEntity {
                 removeTime--;
             } else {
                 remove();
-                if ('*' == MapCreate.mapMatrix[y_pos / Parameter.BLOCK_SIZE][x_pos / Parameter.BLOCK_SIZE]) {
-                    MapCreate.mapMatrix[y_pos / Parameter.BLOCK_SIZE][x_pos / Parameter.BLOCK_SIZE] = ' ';
+                if ('*' == MapCreate.mapMatrix[y_pos / Sprite.BLOCK_SIZE][x_pos / Sprite.BLOCK_SIZE]) {
+                    MapCreate.mapMatrix[y_pos / Sprite.BLOCK_SIZE][x_pos / Sprite.BLOCK_SIZE] = ' ';
                 }
             }
         }

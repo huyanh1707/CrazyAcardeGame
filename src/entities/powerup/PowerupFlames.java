@@ -1,6 +1,5 @@
 package entities.powerup;
 
-import graphics.Parameter;
 import entities.player.Player;
 import gamelogic.SoundEffect;
 import graphics.Sprite;
@@ -15,7 +14,7 @@ public class PowerupFlames extends Powerup {
     public void checkPlayerCollision() {
         if (isColliding(Player.getPlayer())) {
             Player.getPlayer().increaseFlames();
-            MapCreate.mapMatrix[y_pos / Parameter.BLOCK_SIZE][x_pos / Parameter.BLOCK_SIZE] = ' ';
+            MapCreate.mapMatrix[y_pos / Sprite.BLOCK_SIZE][x_pos / Sprite.BLOCK_SIZE] = ' ';
             SoundEffect.EAT_PROPS.play(false);
             remove();
         }

@@ -1,6 +1,5 @@
 package entities.bomb;
 
-import graphics.Parameter;
 import gamelogic.Director;
 import entities.AnimatedEntity;
 import entities.RectangleBox;
@@ -23,7 +22,7 @@ public class BombExplosion extends AnimatedEntity {
 
     public BombExplosion(int x, int y, Director dir, boolean last) {
         super(x, y, Sprite.transparent);
-        boundedBox = new RectangleBox(x , y, Parameter.SCALED_SIZE, Parameter.SCALED_SIZE);
+        boundedBox = new RectangleBox(x , y, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
         explosionDir = dir;
         isLast = last;
     }
