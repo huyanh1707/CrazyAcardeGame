@@ -35,7 +35,7 @@ public class MovingEnemy {
     }
 
     private boolean validNode(char[][] matrix, int x, int y) {
-        return 0 <= x && x < matrix[0].length && 0 <= y && y < matrix.length && '0' != matrix[y][x];
+        return 0 <= x && x < matrix[0].length && 0 <= y && y < matrix.length;
     }
 
     private List<Node> getNeighborNodes(char[][] matrix, Node node) {
