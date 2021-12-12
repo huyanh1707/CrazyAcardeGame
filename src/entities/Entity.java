@@ -1,6 +1,6 @@
 package entities;
 
-import graphics.Parameter;
+import graphics.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -17,8 +17,8 @@ public abstract class Entity {
         x_pos = x;
         y_pos = y;
 
-        x_node = x / Parameter.BLOCK_SIZE;
-        y_node = y / Parameter.BLOCK_SIZE;
+        x_node = x / Sprite.BLOCK_SIZE;
+        y_node = y / Sprite.BLOCK_SIZE;
 
         this.image = image;
         removed = false;
@@ -37,6 +37,8 @@ public abstract class Entity {
     public void setImage(Image image) {
         this.image = image;
     }
+
+    public Image getImage() { return this.image; }
 
     public boolean isRemoved() {
         return removed;

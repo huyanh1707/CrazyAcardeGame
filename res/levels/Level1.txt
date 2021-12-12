@@ -1,16 +1,16 @@
 1 13 17
 #################
-#p s* *   * x1  #
+#p *s *  * 2x   #
 # #*# #*# # # #*#
-#* *  * 2 **    #
+#* * 1*   **    #
 #*# # #*# # #*# #
 #  *   *    ** *#
 #*#*# #*#*# # # #
 #  1  **   *    #
 # # # # # #*# #*#
-#  *  ** *  1   #
+#  *  ** *  2   #
 #*# #*# # #*# #*#
-#  * *  *  *   2#
+#  * *  *  *1   #
 #################
 
 Mô tả cấu trúc tệp cấu hình màn chơi:
@@ -27,8 +27,11 @@ x - Portal
 
 Character:
 p - Bomber
-1 - Balloon
-2 - Oneal
+1 - Balloon 100 Low speed 1
+2 - Doll 200 Low speed 2
+3 - Oneal 500 High speed 2
+4 - Minvo 800 High speed 3
+5 - Kondoria 1000 High passbrick speed 2
 
 Items:
 b - Bomb Item
@@ -36,5 +39,3 @@ f - Flame Item
 s - Speed Item
 
 Kí tự khác các kí tự trên - Grass
-
-- 5 low

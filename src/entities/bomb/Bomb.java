@@ -1,7 +1,6 @@
 package entities.bomb;
 
 import gamelogic.Director;
-import graphics.Parameter;
 import entities.AnimatedEntity;
 import entities.Entity;
 import entities.player.Player;
@@ -20,12 +19,12 @@ public class Bomb extends AnimatedEntity {
 
     public Bomb(int x, int y, Image boom) {
         super(x, y, boom);
-        boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE, Parameter.SCALED_SIZE);
+        boundedBox = new RectangleBox(x, y, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
     }
 
     public Bomb(int x, int y) {
         super(x, y, Sprite.bomb);
-        boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE, Parameter.SCALED_SIZE);
+        boundedBox = new RectangleBox(x, y, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
     }
 
     public void update() {

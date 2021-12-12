@@ -3,7 +3,6 @@ package entities.player;
 import entities.Entity;
 import entities.MovingEntity;
 import entities.RectangleBox;
-import graphics.Parameter;
 import entities.bomb.Bomb;
 import entities.bomb.BombExplosion;
 import entities.enemies.Enemy;
@@ -20,12 +19,13 @@ public class Player extends MovingEntity {
 
     private static Player player = null;
 
+    private String name = "";
     private int bombCount = 1;
     private int bombRadius = 1;
-    private int speed = 2;
+    private int speed;
     private int placedBombs;
     private int immortalTime = 100;
-    private int lifeCount = 10;
+    private int lifeCount = 100;
 
     private boolean ableToPassFlame = false;
     public boolean ableToPassBomb = false;
@@ -40,7 +40,7 @@ public class Player extends MovingEntity {
 
     public Player(int x, int y, Image player) {
         super(x, y, player);
-        boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE - 10, Parameter.SCALED_SIZE - 2);
+        boundedBox = new RectangleBox(x, y, Sprite.SCALED_SIZE - 10, Sprite.SCALED_SIZE - 2);
         alive = true;
         input = new KeyInput();
         x_init = x;
@@ -50,7 +50,7 @@ public class Player extends MovingEntity {
 
     public Player(int x, int y) {
         super(x, y, Sprite.player_right);
-        boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE - 10, Parameter.SCALED_SIZE - 2);
+        boundedBox = new RectangleBox(x, y, Sprite.SCALED_SIZE - 10, Sprite.SCALED_SIZE - 2);
         alive = true;
         input = new KeyInput();
         x_init = x;
@@ -89,8 +89,8 @@ public class Player extends MovingEntity {
         } else {
             canDie = true;
         }
-        x_node = x_pos / Parameter.BLOCK_SIZE;
-        y_node = y_pos / Parameter.BLOCK_SIZE;
+        x_node = x_pos / Sprite.BLOCK_SIZE;
+        y_node = y_pos / Sprite.BLOCK_SIZE;
     }
 
     public void playAnimation() {
@@ -143,11 +143,11 @@ public class Player extends MovingEntity {
                 return false;
             }
         }
-        if (x < Parameter.BLOCK_SIZE || x > MapCreate.CANVAS_WIDTH - Parameter.BLOCK_SIZE) {
+        if (x < Sprite.BLOCK_SIZE || x > MapCreate.CANVAS_WIDTH - Sprite.BLOCK_SIZE) {
             boundedBox.setPosition(x_pos, y_pos);
             return false;
         }
-        if (y < Parameter.BLOCK_SIZE || y > MapCreate.CANVAS_HEIGHT - Parameter.BLOCK_SIZE) {
+        if (y < Sprite.BLOCK_SIZE || y > MapCreate.CANVAS_HEIGHT - Sprite.BLOCK_SIZE) {
             boundedBox.setPosition(x_pos, y_pos);
             return false;
         }
@@ -162,6 +162,7 @@ public class Player extends MovingEntity {
             }
         }
     }
+
     public void checkBombCollision() {
         for (Entity entity : MapCreate.getTopLayer()) {
             if (entity instanceof BombExplosion
@@ -187,7 +188,6 @@ public class Player extends MovingEntity {
             setPosition(x_init, y_init);
             setImage(Sprite.player_right);
         } else {
-            SoundEffect.GAMEPLAY.stop();
             MapCreate.LoseEffect();
             alive = false;
             remove();
@@ -196,8 +196,8 @@ public class Player extends MovingEntity {
 
     public void placeBomb() {
         ableToPlaceBomb = true;
-        int x_bomb = ((x_pos + Parameter.SCALED_SIZE / 2) / Parameter.SCALED_SIZE) * Parameter.SCALED_SIZE;
-        int y_bomb = ((y_pos + Parameter.SCALED_SIZE / 2) / Parameter.SCALED_SIZE) * Parameter.SCALED_SIZE;
+        int x_bomb = ((x_pos + Sprite.SCALED_SIZE / 2) / Sprite.SCALED_SIZE) * Sprite.SCALED_SIZE;
+        int y_bomb = ((y_pos + Sprite.SCALED_SIZE / 2) / Sprite.SCALED_SIZE) * Sprite.SCALED_SIZE;
         for (Entity bomb : bombList) {
             if (bomb.getX_pos() == x_bomb && bomb.getY_pos() == y_bomb) {
                 ableToPlaceBomb = false;
@@ -208,7 +208,7 @@ public class Player extends MovingEntity {
             Bomb bomb = new Bomb(x_bomb, y_bomb);
             MapCreate.getTopLayer().add(bomb);
             bombList.add(bomb);
-            MapCreate.mapMatrix[y_bomb / Parameter.BLOCK_SIZE][x_bomb / Parameter.BLOCK_SIZE] = '*';
+            MapCreate.mapMatrix[y_bomb / Sprite.BLOCK_SIZE][x_bomb / Sprite.BLOCK_SIZE] = '*';
             SoundEffect.PLACE_BOMB.play(false);
         }
     }
@@ -223,7 +223,7 @@ public class Player extends MovingEntity {
         }
     }
 
-    public void resetPlayer() {
+    public void resetPlayer1() {
         setImage(Sprite.player_right);
         alive = true;
         resetPlaceAble();
@@ -232,6 +232,14 @@ public class Player extends MovingEntity {
         resetSpeed();
         resetLife();
         bombList.clear();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getX_node() {
@@ -294,10 +302,6 @@ public class Player extends MovingEntity {
 
     public void increaseSpeed() {
         speed ++;
-    }
-
-    public int getImmortalTime() {
-        return immortalTime;
     }
 
     public Image getUpImage() {

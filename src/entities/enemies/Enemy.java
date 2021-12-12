@@ -44,15 +44,13 @@ public abstract class Enemy extends MovingEntity {
 
     public boolean checkFriendlyCollisions(int x, int y) {
         this.boundedBox.setPosition(x, y);
-        Iterator var3 = MapCreate.getTopLayer().iterator();
-
+        Iterator<Entity> var3 = MapCreate.getTopLayer().iterator();
         Entity entity;
         do {
             if (!var3.hasNext()) {
                 return super.checkFriendlyCollisions(x, y);
             }
-
-            entity = (Entity)var3.next();
+            entity = var3.next();
         }
         while(!this.isColliding(entity));
         this.boundedBox.setPosition(this.x_pos, this.y_pos);

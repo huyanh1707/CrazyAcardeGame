@@ -109,25 +109,21 @@ public class MovingEnemy {
                     pathExits = true;
                     break;
                 }
-
                 if (lastNode.x + 1 == e_x && lastNode.y == e_y) {
                     direction = Director.LEFT;
                     pathExits = true;
                     break;
                 }
-
                 if (lastNode.x == e_x && lastNode.y - 1 == e_y) {
                     direction = Director.DOWN;
                     pathExits = true;
                     break;
                 }
-
                 if (lastNode.x == e_x && lastNode.y + 1 == e_y) {
                     direction = Director.UP;
                     pathExits = true;
                     break;
                 }
-
                 try {
                     checkingMap[lastNode.y][lastNode.x] = '0';
                 } catch (ArrayIndexOutOfBoundsException var14) {
@@ -137,11 +133,9 @@ public class MovingEnemy {
                 queue.addAll(neighbors);
             }
         }
-
         if (!pathExits) {
             direction = this.randomMoving(matrix, e_x, e_y);
         }
-
         return direction;
     }
 
@@ -166,7 +160,6 @@ public class MovingEnemy {
             case HIGH:
                 direction = this.pathFinding(matrix, e_x, e_y, this.player.getX_node(), this.player.getX_node(), MovingEnemy.IQ.MEDIUM);
         }
-
         return direction;
     }
 
@@ -174,7 +167,6 @@ public class MovingEnemy {
         LOW,
         MEDIUM,
         HIGH;
-
         IQ() {
         }
     }

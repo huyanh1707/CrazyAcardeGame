@@ -1,14 +1,14 @@
 package entities.powerup;
 
-import graphics.Parameter;
 import entities.Entity;
 import entities.RectangleBox;
+import graphics.Sprite;
 import javafx.scene.image.Image;
 
 public abstract class Powerup extends Entity {
     public Powerup(int x, int y, Image powerup) {
         super(x, y, powerup);
-        boundedBox = new RectangleBox(x, y, Parameter.SCALED_SIZE, Parameter.SCALED_SIZE);
+        boundedBox = new RectangleBox(x, y, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
     }
 
     public abstract void checkPlayerCollision();

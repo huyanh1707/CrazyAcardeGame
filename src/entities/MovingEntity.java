@@ -1,9 +1,9 @@
 package entities;
 
-import graphics.Parameter;
 import gamelogic.Director;
 import entities.block.Brick;
 import entities.block.Wall;
+import graphics.Sprite;
 import javafx.scene.image.Image;
 import gameplay.MapCreate;
 
@@ -14,7 +14,7 @@ public abstract class MovingEntity extends AnimatedEntity {
     protected boolean ableToPassWall = false;
     protected boolean ableToPassBrick = false;
     protected int passAwayTime = 30;
-    protected int aBigStep = Parameter.BLOCK_SIZE;
+    protected int aBigStep = Sprite.BLOCK_SIZE;
     protected int speed;
 
     public MovingEntity(int x, int y, Image image) {

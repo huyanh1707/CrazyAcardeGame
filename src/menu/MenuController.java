@@ -1,15 +1,17 @@
 package menu;
 
+import entities.player.Player;
+import entities.player.Player2;
 import gamelogic.SoundEffect;
 import gameplay.*;
+import graphics.Sprite;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -26,25 +28,33 @@ public class MenuController implements Initializable {
     private Button SinglePlayerButton, ExitButton, MultiplayerButton, Button3, TutorialButton;
 
     @FXML
-    private AnchorPane GamePane, Pane2, Pane3, TutorialPane;
+    private AnchorPane GamePane, MultiPlayerPane, ControlPane, TutorialPane;
 
     @FXML
-    private RadioButton blue, red, green;
+    private RadioButton blue, red, green, blue1, red1, green1, blue2, red2, green2;
+
+    @FXML
+    private ToggleGroup Character, Character1, Character2;
 
     @FXML
     private ImageView mute, unmute;
 
     @FXML
-    public void PlaySound(MouseEvent event) {
+    public TextField NameField, NameField1, NameField2;
+
+    @FXML
+    public void PlaySound() {
         unmute.setVisible(true);
         mute.setVisible(false);
+        SoundEffect.unmute();
         SoundEffect.BACKGROUND.play(true);
     }
 
     @FXML
-    public void PauseSound(MouseEvent event) {
+    public void PauseSound() {
         unmute.setVisible(false);
         mute.setVisible(true);
+        SoundEffect.mute();
         SoundEffect.BACKGROUND.stop();
     }
 
@@ -54,6 +64,19 @@ public class MenuController implements Initializable {
         Pane appRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gameview/GameView.fxml")));
         Scene scene = new Scene(appRoot);
         MapCreate.initGame(appRoot, scene);
+        Player.getPlayer().setName(NameField.getText());
+        if(blue.isSelected()) {
+            Player.getPlayer().setImage(Sprite.blue_down);
+            Sprite.setBlue();
+        }
+        if(red.isSelected()) {
+            Player.getPlayer().setImage(Sprite.red_down);
+            Sprite.setRed();
+        }
+        if(green.isSelected()) {
+            Player.getPlayer().setImage(Sprite.green_down);
+            Sprite.setGreen();
+        }
         gameStage.setScene(scene);
         gameStage.centerOnScreen();
         gameStage.show();
@@ -68,6 +91,32 @@ public class MenuController implements Initializable {
         Pane appRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gameview/GameMPView.fxml")));
         Scene scene = new Scene(appRoot);
         MapCreate.initMultiPlayerGame(appRoot, scene);
+        Player.getPlayer().setName(NameField1.getText());
+        Player2.getPlayer().setName(NameField2.getText());
+        if(blue1.isSelected()) {
+            Player.getPlayer().setImage(Sprite.blue_down);
+            Sprite.setBlue();
+        }
+        if(red1.isSelected()) {
+            Player.getPlayer().setImage(Sprite.red_down);
+            Sprite.setRed();
+        }
+        if(green1.isSelected()) {
+            Player.getPlayer().setImage(Sprite.green_down);
+            Sprite.setGreen();
+        }
+        if(blue2.isSelected()) {
+            Player2.getPlayer().setImage(Sprite.blue_down);
+            Sprite.setBlue2();
+        }
+        if(red2.isSelected()) {
+            Player2.getPlayer().setImage(Sprite.red_down);
+            Sprite.setRed2();
+        }
+        if(green2.isSelected()) {
+            Player2.getPlayer().setImage(Sprite.green_down);
+            Sprite.setGreen2();
+        }
         gameStage.setScene(scene);
         gameStage.centerOnScreen();
         gameStage.show();
@@ -79,11 +128,11 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SinglePlayerButton.setOnAction(event -> {
-            if(Pane2.getTranslateX() == -720) {
-                moveChildPane(Pane2);
+            if(MultiPlayerPane.getTranslateX() == -720) {
+                moveChildPane(MultiPlayerPane);
             }
-            if(Pane3.getTranslateX() == -720) {
-                moveChildPane(Pane3);
+            if(ControlPane.getTranslateX() == -720) {
+                moveChildPane(ControlPane);
             }
             else if(TutorialPane.getTranslateX() == -720) {
                 moveChildPane(TutorialPane);
@@ -94,35 +143,35 @@ public class MenuController implements Initializable {
             if(GamePane.getTranslateX() == -720) {
                 moveChildPane(GamePane);
             }
-            if(Pane3.getTranslateX() == -720) {
-                moveChildPane(Pane3);
+            if(ControlPane.getTranslateX() == -720) {
+                moveChildPane(ControlPane);
             }
             else if(TutorialPane.getTranslateX() == -720) {
                 moveChildPane(TutorialPane);
             }
-            moveChildPane(Pane2);
+            moveChildPane(MultiPlayerPane);
         });
         Button3.setOnAction(event -> {
             if(GamePane.getTranslateX() == -720) {
                 moveChildPane(GamePane);
             }
-            if(Pane2.getTranslateX() == -720) {
-                moveChildPane(Pane2);
+            if(MultiPlayerPane.getTranslateX() == -720) {
+                moveChildPane(MultiPlayerPane);
             }
             else if(TutorialPane.getTranslateX() == -720) {
                 moveChildPane(TutorialPane);
             }
-            moveChildPane(Pane3);
+            moveChildPane(ControlPane);
         });
         TutorialButton.setOnAction(event -> {
             if(GamePane.getTranslateX() == -720) {
                 moveChildPane(GamePane);
             }
-            if(Pane3.getTranslateX() == -720) {
-                moveChildPane(Pane3);
+            if(ControlPane.getTranslateX() == -720) {
+                moveChildPane(ControlPane);
             }
-            else if(Pane2.getTranslateX() == -720) {
-                moveChildPane(Pane2);
+            else if(MultiPlayerPane.getTranslateX() == -720) {
+                moveChildPane(MultiPlayerPane);
             }
             moveChildPane(TutorialPane);
         });

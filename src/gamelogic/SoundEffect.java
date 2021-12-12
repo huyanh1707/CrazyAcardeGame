@@ -10,9 +10,11 @@ public class SoundEffect {
     public static SoundEffect GAME_START = new SoundEffect("/sound/gameStart.wav");
     public static SoundEffect REVIVAL = new SoundEffect("/sound/revival.wav");
     public static SoundEffect EAT_PROPS = new SoundEffect("/sound/eatProp.wav");
-    public static SoundEffect PLACE_BOMB = new SoundEffect("/sound/place_bomb.wav");
-    public static SoundEffect EXPLOSION = new SoundEffect("/sound/explosion.wav");
+    public static SoundEffect PLACE_BOMB = new SoundEffect("/sound/bubbleSet.wav");
+    public static SoundEffect EXPLOSION = new SoundEffect("/sound/bubbleBoom.wav");
     public static SoundEffect ENEMY_KILL = new SoundEffect("/sound/enemyKill.wav");
+    public static SoundEffect DEFEAT = new SoundEffect("/sound/defeat.wav");
+    public static SoundEffect WIN = new SoundEffect("/sound/win.wav");
 
     public enum Volume {
         MUTE, UNMUTE
@@ -60,5 +62,9 @@ public class SoundEffect {
     public void stop() {
         clip.stop();
         clip.setFramePosition(0);
+    }
+
+    public boolean isPlaying() {
+        return clip.isRunning();
     }
 }

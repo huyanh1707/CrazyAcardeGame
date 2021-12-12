@@ -1,12 +1,14 @@
 package gamelogic;
 
-import graphics.Parameter;
 import entities.Entity;
 import entities.player.Player;
 import entities.player.Player2;
+import graphics.Sprite;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import gameplay.MapCreate;
+
+import java.util.Map;
 
 public class MultiPlayerGameLoop {
     public static void multiplayerStart(GraphicsContext graphicsContext) {
@@ -14,13 +16,14 @@ public class MultiPlayerGameLoop {
             @Override
             public void handle(long now) {
                 graphicsContext.clearRect(0, 0
-                        , MapCreate.mapWidth * Parameter.SCALED_SIZE
-                        , MapCreate.mapHeight * Parameter.SCALED_SIZE);
+                        , MapCreate.mapWidth * Sprite.SCALED_SIZE
+                        , MapCreate.mapHeight * Sprite.SCALED_SIZE);
                 updateGame();
+                MapCreate.updateMultiLabel();
                 renderGame(graphicsContext);
                 if(MapCreate.pause2) {
-                    Player.getPlayer().resetPlayer();
-                    Player2.getPlayer().resetPlayer();
+                    Player.getPlayer().resetPlayer1();
+                    Player2.getPlayer().resetPlayer2();
                     stop();
                 }
             }

@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 public class Oneal extends Enemy {
     public Oneal(int x, int y, Image oneal) {
         super(x, y, oneal);
-        score = 200;
+        score = 500;
         speed = 2;
         movingEnemy = new MovingEnemy(MovingEnemy.IQ.MEDIUM,
                 ableToPassBrick, ableToPassWall);
@@ -27,7 +27,7 @@ public class Oneal extends Enemy {
                 case UP:
                 case RIGHT:
                     image = Sprite.playSpriteAnimation(Sprite.oneal_right
-                            , Sprite.oneal_right_2, Sprite.oneal_right_2, animate, 30);
+                            , Sprite.oneal_right_1, Sprite.oneal_right_2, animate, 30);
                     break;
                 case DOWN:
                 case LEFT:

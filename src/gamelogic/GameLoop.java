@@ -1,8 +1,8 @@
 package gamelogic;
 
-import graphics.Parameter;
 import entities.Entity;
 import entities.player.Player;
+import graphics.Sprite;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import gameplay.MapCreate;
@@ -13,13 +13,13 @@ public class GameLoop {
             @Override
             public void handle(long now) {
                 graphicsContext.clearRect(0, 0
-                        , MapCreate.mapWidth * Parameter.SCALED_SIZE
-                        , MapCreate.mapHeight * Parameter.SCALED_SIZE);
+                        , MapCreate.mapWidth * Sprite.SCALED_SIZE
+                        , MapCreate.mapHeight * Sprite.SCALED_SIZE);
                 updateGame();
                 MapCreate.updateLabel();
                 renderGame(graphicsContext);
                 if(MapCreate.pause1) {
-                    Player.getPlayer().resetPlayer();
+                    Player.getPlayer().resetPlayer1();
                     MapCreate.resetLevel();
                     stop();
                 }

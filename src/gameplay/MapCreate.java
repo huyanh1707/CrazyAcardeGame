@@ -14,7 +14,9 @@ import gamelogic.KeyController;
 import gamelogic.GameLoop;
 import entities.*;
 import gamelogic.MultiPlayerGameLoop;
-import graphics.Parameter;
+import gamelogic.SoundEffect;
+import graphics.Sprite;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -57,11 +59,13 @@ public class MapCreate {
     private static final List<Entity> midLayer = new ArrayList<>();
     private static final List<Enemy> enemyLayer = new ArrayList<>();
 
+    public static ImageView avatar, avatar1, avatar2;
+    public static Label name, name1, name2;
     public static Label score;
-    public static Label life;
-    public static Label bombs;
-    public static Label range;
-    public static Label speed;
+    public static Label life, life1, life2;
+    public static Label bombs, bombs1, bombs2;
+    public static Label range, range1, range2;
+    public static Label speed, speed1, speed2;
     public static Label levels;
     public static Label enemies;
     public static ImageView loseImage;
@@ -71,7 +75,8 @@ public class MapCreate {
         canvas = new Canvas();
         initLabel();
         loseImage = new ImageView();
-        root.getChildren().addAll(canvas, score, life, bombs, levels, enemies, range, speed, loseImage);
+        root.getChildren().addAll(canvas, avatar, name, score,
+                life, bombs, levels, enemies, range, speed, loseImage);
         graphicsContext = canvas.getGraphicsContext2D();
         createLevel(currentLevel);
         GameLoop.start(graphicsContext);
@@ -81,7 +86,10 @@ public class MapCreate {
     public static void initMultiPlayerGame(Pane root, Scene scene) {
         pause2 = false;
         canvas = new Canvas();
-        root.getChildren().addAll(canvas);
+        initMultiLabel();
+        loseImage = new ImageView();
+        root.getChildren().addAll(canvas, avatar1, avatar2, name1, name2,
+                bombs1, bombs2, range1, range2, speed1, speed2, life1, life2, loseImage);
         graphicsContext = canvas.getGraphicsContext2D();
         createMultiPlayerLevel();
         MultiPlayerGameLoop.multiplayerStart(graphicsContext);
@@ -94,7 +102,7 @@ public class MapCreate {
         for (int i = 0; i < mapHeight; i++) {
             for (int j = 0; j < mapWidth; j++) {
                 char c = myMap[i][j];
-                addEntity(c, j * Parameter.SCALED_SIZE, i * Parameter.SCALED_SIZE);
+                addEntity(c, j * Sprite.SCALED_SIZE, i * Sprite.SCALED_SIZE);
             }
         }
         canvas.setHeight(CANVAS_HEIGHT);
@@ -107,7 +115,7 @@ public class MapCreate {
         for (int i = 0; i < mapHeight; i++) {
             for (int j = 0; j < mapWidth; j++) {
                 char c = myMap[i][j];
-                addEntity(c, j * Parameter.SCALED_SIZE, i * Parameter.SCALED_SIZE);
+                addEntity(c, j * Sprite.SCALED_SIZE, i * Sprite.SCALED_SIZE);
             }
         }
         canvas.setHeight(CANVAS_HEIGHT);
@@ -138,12 +146,12 @@ public class MapCreate {
     }
 
     public static void nextLevel() {
-        if (currentLevel <= 5) {
+        if (currentLevel < 5) {
             currentLevel += 1;
         } else {
-            currentLevel = 1;
+            pause1 = true;
+            WinEffect();
         }
-
         createLevel(currentLevel);
         player.resetBombList();
     }
@@ -197,17 +205,20 @@ public class MapCreate {
                 break;
             case '2':
                 boardLayer.add(new Grass(x, y));
-                enemyLayer.add(new Oneal(x, y));
+                enemyLayer.add(new Doll(x, y));
                 break;
             case '3':
                 boardLayer.add(new Grass(x, y));
-                enemyLayer.add(new Doll(x, y));
+                enemyLayer.add(new Oneal(x, y));
                 break;
             case '4':
                 boardLayer.add(new Grass(x, y));
+                enemyLayer.add(new Minvo(x, y));
+                break;
+            case '5':
+                boardLayer.add(new Grass(x, y));
                 enemyLayer.add(new Kondoria(x, y));
                 break;
-            // Powerup item
             case 'x':
                 boardLayer.add(new Grass(x, y));
                 midLayer.add(new Portal(x, y));
@@ -240,8 +251,8 @@ public class MapCreate {
             mapLevel = Integer.parseInt(tokens.nextToken());
             mapHeight = Integer.parseInt(tokens.nextToken());
             mapWidth = Integer.parseInt(tokens.nextToken());
-            CANVAS_HEIGHT = mapHeight * Parameter.BLOCK_SIZE;
-            CANVAS_WIDTH = mapWidth * Parameter.BLOCK_SIZE;
+            CANVAS_HEIGHT = mapHeight * Sprite.BLOCK_SIZE;
+            CANVAS_WIDTH = mapWidth * Sprite.BLOCK_SIZE;
             myMap = new char[mapHeight][mapWidth];
             mapMatrix = new char[mapHeight][mapWidth];
             for (int i = 0; i < mapHeight; i++) {
@@ -285,6 +296,9 @@ public class MapCreate {
     }
 
     private static void initLabel() {
+        // constructor
+        avatar = new ImageView();
+        name = new Label("Player");
         levels = new Label("Level");
         score = new Label("Score");
         life = new Label("Life");
@@ -292,6 +306,8 @@ public class MapCreate {
         range = new Label("Range");
         speed = new Label("Speed");
         enemies = new Label("Enemies");
+        //font
+        name.setFont(new Font("Berlin Sans FB", 20));
         levels.setFont(new Font("Berlin Sans FB", 17));
         score.setFont(new Font("Berlin Sans FB", 17));
         life.setFont(new Font("Berlin Sans FB", 17));
@@ -299,6 +315,9 @@ public class MapCreate {
         range.setFont(new Font("Berlin Sans FB", 17));
         speed.setFont(new Font("Berlin Sans FB", 17));
         enemies.setFont(new Font("Berlin Sans FB", 17));
+        //layout
+        avatar.setLayoutX(875); avatar.setLayoutY(40);
+        name.setLayoutX(842); name.setLayoutY(512);
         levels.setLayoutX(885); levels.setLayoutY(130);
         score.setLayoutX(885); score.setLayoutY(175);
         life.setLayoutX(885); life.setLayoutY(220);
@@ -306,9 +325,65 @@ public class MapCreate {
         range.setLayoutX(885); range.setLayoutY(310);
         speed.setLayoutX(885); speed.setLayoutY(355);
         enemies.setLayoutX(885); enemies.setLayoutY(400);
+        // size
+        avatar.setFitHeight(70); avatar.setFitWidth(65);
+        name.setPrefWidth(135); name.setAlignment(Pos.CENTER);
+    }
+
+    private static void initMultiLabel() {
+        // constructor
+        avatar1 = new ImageView();
+        avatar2 = new ImageView();
+        name1 = new Label("Player");
+        name2 = new Label("Player");
+        life1 = new Label("Life");
+        life2 = new Label("Life");
+        bombs1 = new Label("Bomb");
+        bombs2 = new Label("Bomb");
+        range1 = new Label("Range");
+        range2 = new Label("Range");
+        speed1 = new Label("Speed");
+        speed2 = new Label("Speed");
+        //font
+        name1.setFont(new Font("Berlin Sans FB", 20));
+        name2.setFont(new Font("Berlin Sans FB", 20));
+        life1.setFont(new Font("Berlin Sans FB", 17));
+        life2.setFont(new Font("Berlin Sans FB", 17));
+        bombs1.setFont(new Font("Berlin Sans FB", 17));
+        bombs2.setFont(new Font("Berlin Sans FB", 17));
+        range1.setFont(new Font("Berlin Sans FB", 17));
+        range2.setFont(new Font("Berlin Sans FB", 17));
+        speed1.setFont(new Font("Berlin Sans FB", 17));
+        speed2.setFont(new Font("Berlin Sans FB", 17));
+        //layout
+        avatar1.setLayoutX(859); avatar1.setLayoutY(34);
+        avatar2.setLayoutX(859); avatar2.setLayoutY(311);
+        name1.setLayoutX(842); name1.setLayoutY(240);
+        name2.setLayoutX(842); name2.setLayoutY(512);
+        life1.setLayoutX(925); life1.setLayoutY(64);
+        life2.setLayoutX(925); life2.setLayoutY(337);
+        bombs1.setLayoutX(887); bombs1.setLayoutY(108);
+        bombs2.setLayoutX(886); bombs2.setLayoutY(382);
+        range1.setLayoutX(887); range1.setLayoutY(153);
+        range2.setLayoutX(886); range2.setLayoutY(427);
+        speed1.setLayoutX(887); speed1.setLayoutY(198);
+        speed2.setLayoutX(886); speed2.setLayoutY(472);
+        // size
+        avatar1.setFitHeight(57); avatar1.setFitWidth(57);
+        avatar2.setFitHeight(57); avatar2.setFitWidth(57);
+        name1.setPrefWidth(135); name1.setAlignment(Pos.CENTER);
+        name2.setPrefWidth(135); name2.setAlignment(Pos.CENTER);
     }
 
     public static void updateLabel() {
+        if (Sprite.player_down == Sprite.blue_down) {
+            avatar.setImage(Sprite.blue_ava);
+        } else if(Sprite.player_down == Sprite.green_down) {
+            avatar.setImage(Sprite.green_ava);
+        } else if(Sprite.player_down == Sprite.red_down) {
+            avatar.setImage(Sprite.red_ava);
+        }
+        name.setText("Player " + Player.getPlayer().getName());
         levels.setText("Level: " + currentLevel);
         life.setText("Life: " + Player.getPlayer().getLifeCount());
         bombs.setText("Bomb: " + Player.getPlayer().getRemainBombs());
@@ -318,10 +393,47 @@ public class MapCreate {
         enemies.setText("Left: " + getEnemyLayer().size());
     }
 
+    public static void updateMultiLabel() {
+        if (Sprite.player_down == Sprite.blue_down) {
+            avatar1.setImage(Sprite.blue_ava);
+        } else if(Sprite.player_down == Sprite.green_down) {
+            avatar1.setImage(Sprite.green_ava);
+        } else if(Sprite.player_down == Sprite.red_down) {
+            avatar1.setImage(Sprite.red_ava);
+        }
+        if (Sprite.player2_down == Sprite.blue_down) {
+            avatar2.setImage(Sprite.blue_ava);
+        } else if(Sprite.player2_down == Sprite.green_down) {
+            avatar2.setImage(Sprite.green_ava);
+        } else if(Sprite.player2_down == Sprite.red_down) {
+            avatar2.setImage(Sprite.red_ava);
+        }
+        name1.setText("Player " + Player.getPlayer().getName());
+        name2.setText("Player2 " + Player2.getPlayer().getName());
+        life1.setText("" + Player.getPlayer().getLifeCount());
+        life2.setText("" + Player2.getPlayer().getLifeCount());
+        bombs1.setText("Bomb: " + Player.getPlayer().getRemainBombs());
+        bombs2.setText("Bomb: " + Player2.getPlayer().getRemainBombs());
+        speed1.setText("Speed: " + Player.getPlayer().getSpeed());
+        speed2.setText("Speed: " + Player2.getPlayer().getSpeed());
+        range1.setText("Range: " + Player.getPlayer().getBombRadius());
+        range2.setText("Range: " + Player2.getPlayer().getBombRadius());
+    }
+
     public static void LoseEffect() {
-//        MapCreate.pause1 = true;
+        SoundEffect.GAMEPLAY.stop();
+        SoundEffect.DEFEAT.play(false);
         Image image = new Image("/gameview/lose.png");
-        MapCreate.loseImage.setImage(image);
+        loseImage.setImage(image);
+        loseImage.setLayoutX(300);
+        loseImage.setLayoutY(280);
+    }
+
+    public static void WinEffect() {
+        SoundEffect.GAMEPLAY.stop();
+        SoundEffect.WIN.play(false);
+        Image image = new Image("/gameview/win.png");
+        loseImage.setImage(image);
         loseImage.setLayoutX(300);
         loseImage.setLayoutY(280);
     }

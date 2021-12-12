@@ -28,7 +28,7 @@ public class Balloon extends Enemy{
                 case UP:
                 case RIGHT:
                     image = Sprite.playSpriteAnimation(Sprite.balloon_right
-                            , Sprite.balloon_right_2, Sprite.balloon_right_2, animate, 30);
+                            , Sprite.balloon_right_1, Sprite.balloon_right_2, animate, 30);
                     break;
                 case DOWN:
                 case LEFT:

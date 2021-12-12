@@ -31,7 +31,7 @@ public class Kondoria extends Enemy {
                 case UP:
                 case RIGHT:
                     image = Sprite.playSpriteAnimation(Sprite.kondoria_right
-                            , Sprite.kondoria_right_2, Sprite.kondoria_right_2, animate, 60);
+                            , Sprite.kondoria_right_1, Sprite.kondoria_right_2, animate, 60);
                     break;
                 case DOWN:
                 case LEFT:

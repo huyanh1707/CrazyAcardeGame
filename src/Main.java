@@ -24,6 +24,6 @@ public class Main extends Application {
         stage.setTitle("BOMBERMAN");
         stage.setScene(scene);
         stage.show();
-        SoundEffect.BACKGROUND.play(true);
+        SoundEffect.BACKGROUND.play(false);
     }
 }

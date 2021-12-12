@@ -19,11 +19,6 @@
             <Image url="@../menu/blue_panel.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="65.0" layoutX="876.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@faceimage/faceblue.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="855.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@item/bubble.png" />
@@ -59,11 +54,6 @@
             <Image url="@item/enemy.png" />
          </image>
       </ImageView>
-      <Label layoutX="878.0" layoutY="512.0" onMouseClicked="#switchToMenu" prefHeight="27.0" prefWidth="65.0" text="PLAYER">
-         <font>
-            <Font name="Berlin Sans FB" size="17.0" />
-         </font>
-      </Label>
       <Label layoutX="877.0" layoutY="583.0" onMouseClicked="#switchToMenu" prefHeight="27.0" prefWidth="65.0" text="MENU">
          <font>
             <Font name="Berlin Sans FB" size="24.0" />
@@ -114,5 +104,6 @@
             <Image url="@../menu/mute.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="blueFace" fitHeight="72.0" fitWidth="65.0" layoutX="876.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
