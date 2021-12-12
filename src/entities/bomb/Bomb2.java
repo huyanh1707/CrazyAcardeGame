@@ -1,5 +1,7 @@
 package entities.bomb;
 
+import entities.Entity;
+import entities.block.Brick;
 import gamelogic.Director;
 import entities.AnimatedEntity;
 import entities.player.Player;
@@ -7,24 +9,12 @@ import entities.player.Player2;
 import entities.RectangleBox;
 import gameplay.MapCreate;
 import graphics.Sprite;
-import javafx.scene.image.Image;
 
 public class Bomb2 extends AnimatedEntity {
     private int countDownTime = 120;
     private int removeTime = 30;
     private boolean allowToPass2 = true;
     private boolean exploded = false;
-
-    private ExplosionDirection[] explosions;
-
-    private BombExplosion explosion;
-
-    private final int explosionTime = 50;
-
-    public Bomb2(int x, int y, Image boom) {
-        super(x, y, boom);
-        boundedBox = new RectangleBox(x, y, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
-    }
 
     public Bomb2(int x, int y) {
         super(x, y, Sprite.bomb);
@@ -61,10 +51,6 @@ public class Bomb2 extends AnimatedEntity {
         }
     }
 
-    public boolean isExploded() {
-        return exploded;
-    }
-
     private void setAllowToPass() {
         if (!isColliding(Player2.getPlayer())) {
             allowToPass2 = false;
@@ -76,11 +62,11 @@ public class Bomb2 extends AnimatedEntity {
     }
 
     public void setExplosions() {
-        explosions = new ExplosionDirection[4];
-//        Entity entity = MapCreate.getFixedEntityAt(x_pos, y_pos);
-//        if (entity instanceof Brick) {
-//            ((Brick) entity).setExploded();
-//        }
+        ExplosionDirection[] explosions = new ExplosionDirection[4];
+        Entity entity = MapCreate.getFixedEntityAt(x_pos, y_pos);
+        if (entity instanceof Brick) {
+            ((Brick) entity).setExploded();
+        }
         for (int i = 0; i < explosions.length; i++) {
             explosions[i] = new ExplosionDirection(x_pos, y_pos, Director.dir[i], Player.getPlayer().getBombRadius());
             for (int j = 0; j < explosions[i].getExplosions().length; j++) {

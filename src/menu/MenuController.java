@@ -65,15 +65,15 @@ public class MenuController implements Initializable {
         Scene scene = new Scene(appRoot);
         MapCreate.initGame(appRoot, scene);
         Player.getPlayer().setName(NameField.getText());
-        if(blue.isSelected()) {
+        if (blue.isSelected()) {
             Player.getPlayer().setImage(Sprite.blue_down);
             Sprite.setBlue();
         }
-        if(red.isSelected()) {
+        if (red.isSelected()) {
             Player.getPlayer().setImage(Sprite.red_down);
             Sprite.setRed();
         }
-        if(green.isSelected()) {
+        if (green.isSelected()) {
             Player.getPlayer().setImage(Sprite.green_down);
             Sprite.setGreen();
         }

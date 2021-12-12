@@ -59,13 +59,12 @@ public class ExplosionDirection {
     }
 
     private void createBombExplosion() {
-        boolean last = false;
+        boolean last;
         int x = x_init;
         int y = y_init;
 
         for (int i = 0; i < explosions.length; i++) {
             last = (i == explosions.length - 1);
-
             switch (dir) {
                 case UP:
                     y -= Sprite.SCALED_SIZE;

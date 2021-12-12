@@ -3,11 +3,10 @@ package entities.enemies;
 import entities.Entity;
 import entities.MovingEntity;
 import entities.RectangleBox;
+import entities.bomb.Bomb;
 import entities.bomb.BombExplosion;
 import gameplay.MapCreate;
 import javafx.scene.image.Image;
-
-import java.util.Iterator;
 
 public abstract class Enemy extends MovingEntity {
     protected int score;
@@ -42,19 +41,16 @@ public abstract class Enemy extends MovingEntity {
 
     }
 
+    @Override
     public boolean checkFriendlyCollisions(int x, int y) {
-        this.boundedBox.setPosition(x, y);
-        Iterator<Entity> var3 = MapCreate.getTopLayer().iterator();
-        Entity entity;
-        do {
-            if (!var3.hasNext()) {
-                return super.checkFriendlyCollisions(x, y);
+        boundedBox.setPosition(x, y);
+        for (Entity entity : MapCreate.getTopLayer()) {
+            if (entity instanceof Bomb && isColliding(entity)) {
+                boundedBox.setPosition(x_pos, y_pos);
+                return false;
             }
-            entity = var3.next();
         }
-        while(!this.isColliding(entity));
-        this.boundedBox.setPosition(this.x_pos, this.y_pos);
-        return false;
+        return super.checkFriendlyCollisions(x, y);
     }
 
     public void checkBombCollision() {

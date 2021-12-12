@@ -25,7 +25,7 @@ public class Player extends MovingEntity {
     private int speed;
     private int placedBombs;
     private int immortalTime = 100;
-    private int lifeCount = 100;
+    private int lifeCount = 10;
 
     private boolean ableToPassFlame = false;
     public boolean ableToPassBomb = false;
@@ -290,7 +290,7 @@ public class Player extends MovingEntity {
         bombCount = 1;
     }
 
-    public void resetLife() { lifeCount = 1;}
+    public void resetLife() { lifeCount = 10;}
 
     public int getSpeed() {
         return speed;

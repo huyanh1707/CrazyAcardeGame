@@ -21,6 +21,9 @@ public class Portal extends Powerup {
         }
     }
 
+    public void checkPlayer2Collision() {
+    }
+
     public void update() {
         checkPlayerCollision();
     }

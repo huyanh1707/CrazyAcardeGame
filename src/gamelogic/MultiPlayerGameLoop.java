@@ -8,8 +8,6 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import gameplay.MapCreate;
 
-import java.util.Map;
-
 public class MultiPlayerGameLoop {
     public static void multiplayerStart(GraphicsContext graphicsContext) {
         AnimationTimer timer = new AnimationTimer() {

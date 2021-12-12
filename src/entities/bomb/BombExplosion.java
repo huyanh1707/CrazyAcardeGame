@@ -4,21 +4,14 @@ import gamelogic.Director;
 import entities.AnimatedEntity;
 import entities.RectangleBox;
 import graphics.Sprite;
-import javafx.scene.image.Image;
 
 public class BombExplosion extends AnimatedEntity {
-
-    private int countDownTime = 10;
 
     private int removeTime = 60;
 
     private Director explosionDir;
 
     private boolean isLast;
-
-    public BombExplosion(int x, int y, Image image) {
-        super(x, y, image);
-    }
 
     public BombExplosion(int x, int y, Director dir, boolean last) {
         super(x, y, Sprite.transparent);

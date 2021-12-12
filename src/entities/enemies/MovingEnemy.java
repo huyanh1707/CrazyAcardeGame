@@ -30,16 +30,21 @@ public class MovingEnemy {
     }
 
     private boolean movableNode(char[][] matrix, int x, int y) {
-        return 0 <= x && x < matrix[0].length && 0 <= y && y < matrix.length && (' ' == matrix[y][x]
-                || this.brickPass && '*' == matrix[y][x] || this.wallPass && '#' == matrix[y][x]);
+        return 0 <= x && x < matrix[0].length
+                && 0 <= y && y < matrix.length
+                && (' ' == matrix[y][x]
+                || (brickPass && '*' == matrix[y][x])
+                || (wallPass && '#' == matrix[y][x]));
     }
 
     private boolean validNode(char[][] matrix, int x, int y) {
-        return 0 <= x && x < matrix[0].length && 0 <= y && y < matrix.length;
+        return 0 <= x && x < matrix[0].length
+                && 0 <= y && y < matrix.length
+                && '0' != matrix[y][x];
     }
 
     private List<Node> getNeighborNodes(char[][] matrix, Node node) {
-        List<Node> neighbors = new ArrayList();
+        List<Node> neighbors = new ArrayList<>();
         if (this.validNode(matrix, node.x - 1, node.y)) {
             neighbors.add(new Node(node.x - 1, node.y));
         }
@@ -74,11 +79,10 @@ public class MovingEnemy {
             case RIGHT:
                 move = this.movableNode(matrix, x + 1, y);
         }
-
         return move;
     }
 
-    private Director pathFinding(char[][] matrix, int e_x, int e_y, int p_x, int p_y, MovingEnemy.IQ iq) {
+    private Director pathFinding(char[][] matrix, int e_x, int e_y, int p_x, int p_y) {
         Director direction = null;
         char[][] checkingMap = new char[matrix.length][matrix[0].length];
 
@@ -93,13 +97,13 @@ public class MovingEnemy {
         }
 
         int tracingRange = 0;
-        if (iq == MovingEnemy.IQ.MEDIUM || iq == MovingEnemy.IQ.HIGH) {
+        if (iq == MovingEnemy.IQ.MEDIUM) {
             tracingRange = 25;
         }
 
         boolean pathExits = false;
         if (Math.abs((e_x - p_x) * (e_y - p_y)) < tracingRange && iq != MovingEnemy.IQ.LOW) {
-            List<MovingEnemy.Node> queue = new ArrayList();
+            List<MovingEnemy.Node> queue = new ArrayList<>();
             queue.add(new Node(p_x, p_y));
 
             while(!queue.isEmpty()) {
@@ -155,10 +159,8 @@ public class MovingEnemy {
                 direction = this.randomMoving(matrix, e_x, e_y);
                 break;
             case MEDIUM:
-                direction = this.pathFinding(matrix, e_x, e_y, this.player.getX_node(), this.player.getY_node(), MovingEnemy.IQ.MEDIUM);
+                direction = this.pathFinding(matrix, e_x, e_y, this.player.getX_node(), this.player.getY_node());
                 break;
-            case HIGH:
-                direction = this.pathFinding(matrix, e_x, e_y, this.player.getX_node(), this.player.getX_node(), MovingEnemy.IQ.MEDIUM);
         }
         return direction;
     }
@@ -166,8 +168,5 @@ public class MovingEnemy {
     public enum IQ {
         LOW,
         MEDIUM,
-        HIGH;
-        IQ() {
-        }
     }
 }
