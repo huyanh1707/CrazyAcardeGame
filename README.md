@@ -1,4 +1,4 @@
-#     BÀI TẬP LỚN - BOMBERMAN GAME - N6
+CRAZY ARCADE GAME
 
 ## Mô tả về Game:
 1. Thiết kế cây thừa kế cho các đối tượng game.
